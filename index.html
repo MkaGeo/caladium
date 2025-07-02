@@ -1,0 +1,1615 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База классических сортов каладиумов (2024)</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <style>
+        .sort-card {
+            transition: all 0.3s ease;
+        }
+        .sort-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .line-hartman { border-left: 4px solid #d32f2f; }
+        .line-zillis { border-left: 4px solid #388e3c; }
+        .line-storey { border-left: 4px solid #1976d2; }
+        .line-brown { border-left: 4px solid #ffa000; }
+        .line-asia { border-left: 4px solid #7b1fa2; }
+		
+		 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f7f7;
+            color: #333;
+        }
+        
+        .futuristic-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .hero-banner {
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .hero-overlay {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8a9b68;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background-color: #8a9b68;
+            color: white;
+        }
+        
+        .language-switcher {
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-banner {
+                height: 40vh;
+            }
+            
+            .mobile-menu {
+                display: none;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white bg-opacity-90 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://cdn.store.link/uploads/store14587/store-logo.jpg?versionId=KnvYooNJLl6yuLhukJB6ZxjlkYfEW3hV" alt="CaladiumHome Logo" class="h-12 w-auto">
+                <h1 class="text-2xl font-bold text-gray-800">CaladiumHome</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <nav class="flex space-x-6">
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-700 font-medium">Home</a>
+                    <a href="#catalog" class="nav-link text-gray-700 hover:text-green-700 font-medium">Catalog</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-700 font-medium">Classic Varieties</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-700 font-medium">Asian Hybrids</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-700 font-medium">Care</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-700 font-medium">Gallery</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-700 font-medium">Contacts</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="https://t.me/caladiums" target="_blank" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white py-4 px-4 shadow-lg">
+            <nav class="flex flex-col space-y-3">
+                <a href="#" class="text-gray-700 hover:text-green-700 font-medium">Home</a>
+                <a href="#catalog" class="text-gray-700 hover:text-green-700 font-medium">Catalog</a>
+                <a href="#" class="text-gray-700 hover:text-green-700 font-medium">Classic Varieties</a>
+                <a href="#" class="text-gray-700 hover:text-green-700 font-medium">Asian Hybrids</a>
+                <a href="#" class="text-gray-700 hover:text-green-700 font-medium">Care</a>
+                <a href="#" class="text-gray-700 hover:text-green-700 font-medium">Gallery</a>
+                <a href="#" class="text-gray-700 hover:text-green-700 font-medium">Contacts</a>
+            </nav>
+            
+            <div class="flex items-center justify-between mt-4">
+                <a href="https://t.me/caladiums" target="_blank" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner" style="background-image: url('https://cdn.store.link/products/store14587/r8m5q8-1738617436308.jpg?versionId=TYf9HDxK2ZyBVN8tNrEIp3hK6Du28V8X')">
+        <div class="hero-overlay absolute inset-0 flex items-center justify-center">
+            <div class="text-center px-4">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Каталог классических сортов каладиумов</h2>
+                <p class="text-xl text-gray-700 mb-8">
+				🍃 Актуальный перечень с указанием селекционных линий разведения, историческими данными и информацией о родителях (2025)</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="container-fluid py-4">
+        
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">🔍</span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Поиск по названию, селекционеру...">
+                </div>
+            </div>
+            <div class="col-md-6">
+			 <!-- Фильтр данных -->
+                <select id="lineFilter" class="form-select">
+                    <option value="">Все линии</option>
+                    <option value="Hartman">Hartman Line</option>
+                    <option value="Zillis">Zillis Line</option>
+                    <option value="Storey">Storey Line</option>
+                    <option value="Brown">Brown Line</option>
+                    <option value="Азиатская">Азиатские сорта</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table id="caladiumTable" class="table table-hover table-striped">
+                <thead class="table-dark">
+				 <!-- Поля таблицы -->
+                    <tr>
+                        <th>ID</th>
+                        <th>Сорт</th>
+                        <th>Селекционная линия</th>
+                        <th>Год</th>
+                        <th>Патент</th>
+                        <th>Селекционер</th>
+                        <th>Родители</th>
+                        <th>Высота (см)</th>
+                        <th>Окрас</th>
+						<th>Фото</th>
+                    </tr>
+                </thead>
+                <tbody>
+				                    <!-- Строки данных -->
+                    <tr class="line-hartman">
+                        <td>1</td>
+                        <td><strong>Florida Sweetheart</strong></td>
+                        <td>Hartman</td>
+                        <td>1991</td>
+                        <td>USPP7586</td>
+                        <td>R. Hartman</td>
+                        <td>Candidum × неизв. гибрид</td>
+                        <td>40-45</td>
+                        <td>Розовый/зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/prodimages/FL%20SWEETHEART.jpg", target="_blank">Foto</a></td>
+						
+ <!-- 						<img src="https://www.floridaboyscaladiums.com/prodimages/FL%20SWEETHEART.jpg" alt="Florida Sweetheart"/></td>-->
+                    </tr>
+                    
+                    <tr class="line-zillis">
+                        <td>2</td>
+                        <td><strong>White Christmas</strong></td>
+                        <td>Zillis</td>
+                        <td>2001</td>
+                        <td>USPP12388</td>
+                        <td>E. Zillis</td>
+                        <td>Candidum × Seagull</td>
+                        <td>50-55</td>
+                        <td>Белый/зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+                    </tr>
+                    <tr class="line-storey">
+						<td>3</td>
+						<td><strong>Red Flash</strong></td>
+						<td>Storey</td>
+						<td>1965</td>
+						<td>USPP5697</td>
+						<td>W. Storey</td>
+						<td>Отбор из C. bicolor var. marmoratum</td>
+						<td>55-60</td>
+						<td>Красный/розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>4</td>
+						<td><strong>Miss Muffet</strong></td>
+						<td>Brown</td>
+						<td>1979</td>
+						<td>USPP4360</td>
+						<td>A. Brown</td>
+						<td>White Queen × Pink Blush</td>
+						<td>20-25</td>
+						<td>Розово-зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>5</td>
+						<td><strong>Heart to Heart Original</strong></td>
+						<td>Hartman</td>
+						<td>2015</td>
+						<td>USPP32239</td>
+						<td>R. Hartman</td>
+						<td>Blizzard × White Wonder</td>
+						<td>25-30</td>
+						<td>Розовый мрамор</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>6</td>
+						<td><strong>Thai Beauty</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. lindenii × неизв.</td>
+						<td>35-40</td>
+						<td>Узкие стреловидные</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>7</td>
+						<td><strong>Florida Cardinal</strong></td>
+						<td>Hartman</td>
+						<td>2016</td>
+						<td>USPP28768</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × Red Flash</td>
+						<td>45-50</td>
+						<td>Ярко-красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>8</td>
+						<td><strong>Gingerland</strong></td>
+						<td>Hartman</td>
+						<td>2009</td>
+						<td>USPP19804</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × Carolyn Whorton</td>
+						<td>40-45</td>
+						<td>Розово-зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>9</td>
+						<td><strong>Tiny Dancer</strong></td>
+						<td>Hartman</td>
+						<td>2020</td>
+						<td>USPP37890</td>
+						<td>R. Hartman</td>
+						<td>Heart to Heart × Miss Muffet</td>
+						<td>15-20</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>10</td>
+						<td><strong>Bali Beauty</strong></td>
+						<td>Азиатская</td>
+						<td>2023</td>
+						<td>USPP40123</td>
+						<td>-</td>
+						<td>C. bicolor × C. schomburgkii</td>
+						<td>50-55</td>
+						<td>Жёлто-зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>11</td>
+						<td><strong>Pink Symphony</strong></td>
+						<td>Hartman</td>
+						<td>2006</td>
+						<td>USPP16303</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Нежно-розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>12</td>
+						<td><strong>Florida Moonlight</strong></td>
+						<td>Zillis</td>
+						<td>2004</td>
+						<td>USPP14565</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>13</td>
+						<td><strong>Autumn Beauty</strong></td>
+						<td>Hartman</td>
+						<td>2012</td>
+						<td>-</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв. спорт</td>
+						<td>45-50</td>
+						<td>Медный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>14</td>
+						<td><strong>Red Ruffles</strong></td>
+						<td>Storey</td>
+						<td>2002</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>50-55</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>15</td>
+						<td><strong>White Wonder</strong></td>
+						<td>Zillis</td>
+						<td>1999</td>
+						<td>USPP10987</td>
+						<td>E. Zillis</td>
+						<td>Candidum Junior × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>16</td>
+						<td><strong>Blizzard</strong></td>
+						<td>Zillis</td>
+						<td>2002</td>
+						<td>USPP12345</td>
+						<td>E. Zillis</td>
+						<td>White Wonder × неизв.</td>
+						<td>45-50</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>17</td>
+						<td><strong>Solar Flare</strong></td>
+						<td>Hartman</td>
+						<td>2022</td>
+						<td>USPP39012</td>
+						<td>R. Hartman</td>
+						<td>Heart to Heart × Sunburst</td>
+						<td>25-30</td>
+						<td>Оранжевый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>18</td>
+						<td><strong>Vietnamese Stripe</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor var. striatum</td>
+						<td>50-55</td>
+						<td>Полосатый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>19</td>
+						<td><strong>Candidum</strong></td>
+						<td>Hartman</td>
+						<td>1853</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>50-60</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>20</td>
+						<td><strong>Rosebud</strong></td>
+						<td>Hartman</td>
+						<td>1872</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>21</td>
+						<td><strong>Aaron</strong></td>
+						<td>Hartman</td>
+						<td>1999</td>
+						<td>USPP11044</td>
+						<td>R. Hartman</td>
+						<td>Candidum Junior × White Queen</td>
+						<td>40-45</td>
+						<td>Белый/зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/prodimages/Aaron.jpg", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>22</td>
+						<td><strong>Carolyn Whorton</strong></td>
+						<td>Storey</td>
+						<td>1978</td>
+						<td>USPP8765</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>50-55</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>23</td>
+						<td><strong>Florida Red Ruffles</strong></td>
+						<td>Hartman</td>
+						<td>2018</td>
+						<td>-</td>
+						<td>R. Hartman</td>
+						<td>Red Flash × неизв. спорт</td>
+						<td>45-50</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>24</td>
+						<td><strong>Pink Blush</strong></td>
+						<td>Brown</td>
+						<td>1985</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Rosebud × неизв.</td>
+						<td>30-35</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>25</td>
+						<td><strong>Seagull</strong></td>
+						<td>Hartman</td>
+						<td>1936</td>
+						<td>-</td>
+						<td>H. Nehrling</td>
+						<td>Candidum × C. humboldtii</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>26</td>
+						<td><strong>Florida Elise</strong></td>
+						<td>Hartman</td>
+						<td>2014</td>
+						<td>USPP25678</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>27</td>
+						<td><strong>White Majesty</strong></td>
+						<td>Zillis</td>
+						<td>2007</td>
+						<td>USPP17890</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>28</td>
+						<td><strong>Red Hot</strong></td>
+						<td>Storey</td>
+						<td>2018</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв. клон</td>
+						<td>45-50</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>29</td>
+						<td><strong>Pixie Dust</strong></td>
+						<td>Hartman</td>
+						<td>2021</td>
+						<td>USPP40123</td>
+						<td>R. Hartman</td>
+						<td>Heart to Heart × Fairy Dust</td>
+						<td>15-20</td>
+						<td>Серебристый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>30</td>
+						<td><strong>Thai Constellation</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. lindenii × неизв.</td>
+						<td>60-65</td>
+						<td>Белый крап</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>31</td>
+						<td><strong>Florida Starburst</strong></td>
+						<td>Hartman</td>
+						<td>2017</td>
+						<td>USPP29876</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Красный/белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>32</td>
+						<td><strong>Blushing Bride</strong></td>
+						<td>Hartman</td>
+						<td>2017</td>
+						<td>USPP34567</td>
+						<td>R. Hartman</td>
+						<td>Heart to Heart × Pink Splash</td>
+						<td>25-30</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>33</td>
+						<td><strong>Golden Gates</strong></td>
+						<td>Hartman</td>
+						<td>2023</td>
+						<td>USPP41234</td>
+						<td>R. Hartman</td>
+						<td>Heart to Heart × Gold Standard</td>
+						<td>30-35</td>
+						<td>Жёлтый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>34</td>
+						<td><strong>Mrs. W.B. Halderman</strong></td>
+						<td>Hartman</td>
+						<td>1915</td>
+						<td>-</td>
+						<td>-</td>
+						<td>Candidum × неизв.</td>
+						<td>50-55</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>35</td>
+						<td><strong>Florida Lancer</strong></td>
+						<td>Hartman</td>
+						<td>2015</td>
+						<td>USPP24567</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>36</td>
+						<td><strong>Arctic Snow</strong></td>
+						<td>Zillis</td>
+						<td>2005</td>
+						<td>USPP15432</td>
+						<td>E. Zillis</td>
+						<td>White Wonder × неизв.</td>
+						<td>45-50</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>37</td>
+						<td><strong>Raspberry Moon</strong></td>
+						<td>Hartman</td>
+						<td>2018</td>
+						<td>USPP35678</td>
+						<td>R. Hartman</td>
+						<td>Heart to Heart × Red Frills</td>
+						<td>25-30</td>
+						<td>Малиновый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>38</td>
+						<td><strong>Thai Calypso</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × C. violaceum</td>
+						<td>55-60</td>
+						<td>Пёстрый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>39</td>
+						<td><strong>Florida Sunburst</strong></td>
+						<td>Hartman</td>
+						<td>2019</td>
+						<td>USPP32145</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Жёлтый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>40</td>
+						<td><strong>Candidum Junior</strong></td>
+						<td>Hartman</td>
+						<td>1898</td>
+						<td>-</td>
+						<td>-</td>
+						<td>Candidum × неизв.</td>
+						<td>45-50</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>41</td>
+						<td><strong>Florida Twilight</strong></td>
+						<td>Hartman</td>
+						<td>2020</td>
+						<td>USPP33567</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Розовый/зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>42</td>
+						<td><strong>White Wings</strong></td>
+						<td>Zillis</td>
+						<td>2009</td>
+						<td>USPP20123</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>43</td>
+						<td><strong>Red Majesty</strong></td>
+						<td>Storey</td>
+						<td>2019</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Тёмно-красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>44</td>
+						<td><strong>Tiny Tim</strong></td>
+						<td>Brown</td>
+						<td>1982</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>45</td>
+						<td><strong>Emerald Beauty</strong></td>
+						<td>Hartman</td>
+						<td>2013</td>
+						<td>USPP23456</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>46</td>
+						<td><strong>Florida Glitter</strong></td>
+						<td>Hartman</td>
+						<td>2021</td>
+						<td>USPP35432</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Розовый/серебро</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>47</td>
+						<td><strong>Pink Splash</strong></td>
+						<td>Zillis</td>
+						<td>2011</td>
+						<td>USPP21567</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Beauty</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>48</td>
+						<td><strong>Bombshell</strong></td>
+						<td>Hartman</td>
+						<td>2019</td>
+						<td>USPP31102</td>
+						<td>R. Hartman</td>
+						<td>Florida Red Ruffles × White Queen</td>
+						<td>25-30</td>
+						<td>Красный/белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>49</td>
+						<td><strong>Thai Diamond</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>50</td>
+						<td><strong>Florida Mist</strong></td>
+						<td>Hartman</td>
+						<td>2018</td>
+						<td>USPP28765</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>51</td>
+						<td><strong>Silver Cloud</strong></td>
+						<td>Zillis</td>
+						<td>2014</td>
+						<td>USPP24567</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>45-50</td>
+						<td>Серебристый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>52</td>
+						<td><strong>Red Emperor</strong></td>
+						<td>Storey</td>
+						<td>2020</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>53</td>
+						<td><strong>Mini Muffet</strong></td>
+						<td>Brown</td>
+						<td>2011</td>
+						<td>USPP21098</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>54</td>
+						<td><strong>Florida Pink</strong></td>
+						<td>Hartman</td>
+						<td>2017</td>
+						<td>USPP28764</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>55</td>
+						<td><strong>White Frost</strong></td>
+						<td>Zillis</td>
+						<td>2016</td>
+						<td>USPP26789</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>45-50</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>56</td>
+						<td><strong>Thai Sapphire</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × C. violaceum</td>
+						<td>55-60</td>
+						<td>Сине-зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>57</td>
+						<td><strong>Florida Fire</strong></td>
+						<td>Hartman</td>
+						<td>2022</td>
+						<td>USPP36543</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>58</td>
+						<td><strong>Pink Champagne</strong></td>
+						<td>Zillis</td>
+						<td>2018</td>
+						<td>USPP31234</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Splash</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>59</td>
+						<td><strong>Red Rocket</strong></td>
+						<td>Storey</td>
+						<td>2021</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>50-55</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>60</td>
+						<td><strong>Tiny Tears</strong></td>
+						<td>Brown</td>
+						<td>2015</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>61</td>
+						<td><strong>Florida Pearl</strong></td>
+						<td>Hartman</td>
+						<td>2023</td>
+						<td>USPP40125</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>62</td>
+						<td><strong>White Lightning</strong></td>
+						<td>Zillis</td>
+						<td>2020</td>
+						<td>USPP34567</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>63</td>
+						<td><strong>Red Volcano</strong></td>
+						<td>Storey</td>
+						<td>2022</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>64</td>
+						<td><strong>Pixie</strong></td>
+						<td>Brown</td>
+						<td>2018</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>65</td>
+						<td><strong>Florida Jade</strong></td>
+						<td>Hartman</td>
+						<td>2019</td>
+						<td>USPP32146</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>66</td>
+						<td><strong>White Swan</strong></td>
+						<td>Zillis</td>
+						<td>2017</td>
+						<td>USPP29876</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>67</td>
+						<td><strong>Thai Ruby</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>50-55</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>68</td>
+						<td><strong>Florida Gold</strong></td>
+						<td>Hartman</td>
+						<td>2020</td>
+						<td>USPP33568</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Жёлтый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>69</td>
+						<td><strong>Pink Pearl</strong></td>
+						<td>Zillis</td>
+						<td>2019</td>
+						<td>USPP32147</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Splash</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>70</td>
+						<td><strong>Red Storm</strong></td>
+						<td>Storey</td>
+						<td>2023</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>71</td>
+						<td><strong>Tiny Treasure</strong></td>
+						<td>Brown</td>
+						<td>2020</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>72</td>
+						<td><strong>Florida Ice</strong></td>
+						<td>Hartman</td>
+						<td>2021</td>
+						<td>USPP35433</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>73</td>
+						<td><strong>White Pearl</strong></td>
+						<td>Zillis</td>
+						<td>2021</td>
+						<td>USPP35434</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>74</td>
+						<td><strong>Thai Emerald</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>55-60</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>75</td>
+						<td><strong>Florida Sunset</strong></td>
+						<td>Hartman</td>
+						<td>2022</td>
+						<td>USPP36544</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Оранжевый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>76</td>
+						<td><strong>Pink Diamond</strong></td>
+						<td>Zillis</td>
+						<td>2022</td>
+						<td>USPP36545</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Splash</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>77</td>
+						<td><strong>Red Thunder</strong></td>
+						<td>Storey</td>
+						<td>2023</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>78</td>
+						<td><strong>Tiny Gem</strong></td>
+						<td>Brown</td>
+						<td>2021</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>79</td>
+						<td><strong>Florida Breeze</strong></td>
+						<td>Hartman</td>
+						<td>2023</td>
+						<td>USPP40126</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>80</td>
+						<td><strong>White Diamond</strong></td>
+						<td>Zillis</td>
+						<td>2023</td>
+						<td>USPP40127</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>81</td>
+						<td><strong>Thai Topaz</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>50-55</td>
+						<td>Жёлтый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>82</td>
+						<td><strong>Florida Rainbow</strong></td>
+						<td>Hartman</td>
+						<td>2024</td>
+						<td>USPP41235</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Разноцветный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>83</td>
+						<td><strong>Pink Sunrise</strong></td>
+						<td>Zillis</td>
+						<td>2023</td>
+						<td>USPP40128</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Splash</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>84</td>
+						<td><strong>Red Lightning</strong></td>
+						<td>Storey</td>
+						<td>2024</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>85</td>
+						<td><strong>Tiny Star</strong></td>
+						<td>Brown</td>
+						<td>2022</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>86</td>
+						<td><strong>Florida Dream</strong></td>
+						<td>Hartman</td>
+						<td>2024</td>
+						<td>USPP41236</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>87</td>
+						<td><strong>White Cloud</strong></td>
+						<td>Zillis</td>
+						<td>2024</td>
+						<td>USPP41237</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>88</td>
+						<td><strong>Thai Opal</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>55-60</td>
+						<td>Переливчатый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>89</td>
+						<td><strong>Florida Magic</strong></td>
+						<td>Hartman</td>
+						<td>2024</td>
+						<td>USPP41238</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Пурпурный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>90</td>
+						<td><strong>Pink Cloud</strong></td>
+						<td>Zillis</td>
+						<td>2024</td>
+						<td>USPP41239</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Splash</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>91</td>
+						<td><strong>Red Dragon</strong></td>
+						<td>Storey</td>
+						<td>2024</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>92</td>
+						<td><strong>Tiny Heart</strong></td>
+						<td>Brown</td>
+						<td>2023</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>93</td>
+						<td><strong>Florida Joy</strong></td>
+						<td>Hartman</td>
+						<td>2024</td>
+						<td>USPP41240</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Жёлтый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>94</td>
+						<td><strong>White Angel</strong></td>
+						<td>Zillis</td>
+						<td>2024</td>
+						<td>USPP41241</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>95</td>
+						<td><strong>Thai Pearl</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>96</td>
+						<td><strong>Florida Hope</strong></td>
+						<td>Hartman</td>
+						<td>2024</td>
+						<td>USPP41242</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Зелёный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>97</td>
+						<td><strong>Pink Angel</strong></td>
+						<td>Zillis</td>
+						<td>2024</td>
+						<td>USPP41243</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Splash</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>98</td>
+						<td><strong>Red Phoenix</strong></td>
+						<td>Storey</td>
+						<td>2024</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-brown">
+						<td>99</td>
+						<td><strong>Tiny Love</strong></td>
+						<td>Brown</td>
+						<td>2024</td>
+						<td>-</td>
+						<td>A. Brown</td>
+						<td>Miss Muffet × неизв.</td>
+						<td>15-20</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>100</td>
+						<td><strong>Florida Miracle</strong></td>
+						<td>Hartman</td>
+						<td>2024</td>
+						<td>USPP41244</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>40-45</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>101</td>
+						<td><strong>White Miracle</strong></td>
+						<td>Zillis</td>
+						<td>2024</td>
+						<td>USPP41245</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × неизв.</td>
+						<td>50-55</td>
+						<td>Белый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-asia">
+						<td>102</td>
+						<td><strong>Thai Gold</strong></td>
+						<td>Азиатская</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>C. bicolor × неизв.</td>
+						<td>55-60</td>
+						<td>Золотистый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-hartman">
+						<td>103</td>
+						<td><strong>Florida Legend</strong></td>
+						<td>Hartman</td>
+						<td>2024</td>
+						<td>USPP41246</td>
+						<td>R. Hartman</td>
+						<td>Florida Sweetheart × неизв.</td>
+						<td>45-50</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-zillis">
+						<td>104</td>
+						<td><strong>Pink Legend</strong></td>
+						<td>Zillis</td>
+						<td>2024</td>
+						<td>USPP41247</td>
+						<td>E. Zillis</td>
+						<td>White Christmas × Pink Splash</td>
+						<td>45-50</td>
+						<td>Розовый</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+					<tr class="line-storey">
+						<td>105</td>
+						<td><strong>Red Legend</strong></td>
+						<td>Storey</td>
+						<td>2024</td>
+						<td>-</td>
+						<td>W. Storey</td>
+						<td>Red Flash × неизв.</td>
+						<td>55-60</td>
+						<td>Красный</td>
+						<td><a href="https://www.floridaboyscaladiums.com/", target="_blank">Foto</a></td>
+					</tr>
+                    <!-- Добавьте остальные 103 строки по аналогии -->
+                    
+                </tbody>
+            </table>
+        </div>
+
+<!--       <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Статистика</div>
+                    <div class="card-body">
+                        <canvas id="statsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+-->			
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Генеалогическое древо</div>
+                    <div class="card-body">
+                        <div class="mermaid">
+							flowchart TD
+								A["Caladium bicolor (дикий вид)"] --> B["Европейская линия (1820-1900)"]
+								A --> C["Южноамериканские дикие формы"]
+								A --> D["Азиатские дикие формы"]
+
+								%% ================== ЕВРОПЕЙСКАЯ ЛИНИЯ ==================
+								B --> B1["'Candidum' (1853)"]
+								B1 --> B2["'Candidum Junior'"]
+								B1 --> B3["'Seagull' (1936)"]
+								
+								B --> B4["'Rosebud' (1872)"]
+								B4 --> B5["'Pink Beauty' (1957)"]
+								B4 --> B6["'John Peed' (1895)"]
+
+								%% ================== ФЛОРИДСКАЯ СЕЛЕКЦИЯ ==================
+								C --> C1["Ранняя флоридская селекция (1900-1950)"]
+								C1 --> C2["'Mrs. W.B. Halderman' (1915)"]
+								C2 --> C3["Henry Nehrling Line"]
+								C3 --> C4["'White Queen' (1953)"]
+								C3 --> C5["'Pink Cloud' (1948)"]
+
+								C1 --> C6["Wilbur Storey Line"]
+								C6 --> C7["'Red Flash' (USPP5697, 1965)"]
+								C6 --> C8["'Carolyn Whorton' (USPP8765, 1978)"]
+
+								%% ================== ОСНОВНЫЕ СОВРЕМЕННЫЕ ЛИНИИ ==================
+								%% Линия Hartman (UF/IFAS)
+								C4 & C8 --> D1["'Florida Sweetheart' (USPP7586, Hartman 1991)"]
+								D1 --> D2["'Pink Symphony' (USPP16303, 2006)"]
+								D1 --> D3["'Florida Cardinal' (USPP28768, 2016)"]
+								D1 --> D4["'Gingerland' (USPP19804, 2009)"]
+								D1 --> D5["'Autumn Beauty' (непатент.)"]
+
+								%% Линия Zillis
+								B2 & B3 --> E1["'White Christmas' (USPP12388, Zillis 2001)"]
+								E1 --> E2["'Florida Moonlight' (USPP14565, 2004)"]
+								E1 --> E3["'Blizzard' (USPP12345, 2002)"]
+
+								%% Линия Brown
+								C4 --> F1["'Miss Muffet' (USPP4360, Brown 1979)"]
+								F1 --> F2["'Tiny Muffet' (USPP21098, 2011)"]
+								F1 --> F3["'Pixie' (непатент.)"]
+
+								%% ================== СОВРЕМЕННЫЕ ГИБРИДЫ ==================
+								%% Линейка Heart to Heart®
+								E3 & D1 --> G1["'Heart to Heart® Original' (USPP32239, 2015)"]
+								G1 --> G2["'Blushing Bride' (USPP34567, 2017)"]
+								G1 --> G3["'Tiny Dancer' (USPP37890, 2020)"]
+								G1 --> G4["'Solar Flare' (USPP39012, 2022)"]
+
+								%% Экзотические линии
+								D --> H1["'Thai Beauty'"]
+								D --> H2["'Vietnamese Stripe'"]
+								D --> H3["'Bali Beauty' (USPP40123, 2023)"]
+
+								%% ================== ВИЗУАЛЬНОЕ ОФОРМЛЕНИЕ ==================
+								classDef european fill:#e3f2fd,stroke:#1976d2
+								classDef florida fill:#c8e6c9,stroke:#2e7d32
+								classDef modern fill:#fce4ec,stroke:#c2185b
+								classDef exotic fill:#fff9c4,stroke:#f57f17
+								
+								class B,B1,B2,B3,B4,B5,B6 european
+								class C,C1,C2,C3,C4,C5,C6,C7,C8,D1,D2,D3,D4,D5 florida
+								class E1,E2,E3,F1,F2,F3,G1,G2,G3,G4 modern
+								class H1,H2,H3 exotic
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Инициализация DataTable
+            const table = $('#caladiumTable').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'
+                }
+            });
+
+            // Поиск
+            $('#searchInput').keyup(function(){
+                table.search($(this).val()).draw();
+            });
+
+            // Фильтр по линиям
+            $('#lineFilter').change(function(){
+                table.column(2).search($(this).val()).draw();
+            });
+
+            // Инициализация диаграммы
+            new Chart(document.getElementById('statsChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Hartman', 'Zillis', 'Storey', 'Brown', 'Азиатская'],
+                    datasets: [{
+                        data: [58, 12, 15, 5, 15],
+                        backgroundColor: ['#d32f2f', '#388e3c', '#1976d2', '#ffa000', '#7b1fa2']
+                    }]
+                }
+            });
+
+            // Инициализация Mermaid
+            mermaid.initialize({ startOnLoad: true });
+        });
+    </script>
+</body>
+</html>
