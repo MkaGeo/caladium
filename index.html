@@ -71,6 +71,16 @@
             padding: 15px;
             background: white;
             border-bottom: 1px solid #e5e7eb;
+            position: relative;
+        }
+        
+        .search-clear {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
         }
         
         /* Контейнер таблицы/каталога */
@@ -96,6 +106,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            background-color: #2c3e50;
         }
         
         th, td {
@@ -105,7 +116,6 @@
         }
         
         th {
-            background-color: #2c3e50;
             color: white;
             font-weight: 500;
         }
@@ -320,6 +330,7 @@
             <div class="search-container">
                 <div class="flex gap-2">
                     <input type="text" id="search" placeholder="Поиск по названию сорта..." class="flex-1 px-4 py-2 border rounded">
+                    <span id="searchClear" class="search-clear hidden"><i class="fas fa-times"></i></span>
                 </div>
             </div>
             
@@ -488,7 +499,7 @@
         // Обновление индикаторов сортировки
         function updateSortIndicators() {
             document.querySelectorAll('.sort-icon').forEach(icon => {
-                icon.textContent = '';
+                icon.remove();
             });
             
             const currentHeader = document.querySelector(`th[data-sort="${currentSortField}"]`);
@@ -730,6 +741,14 @@
         // Поиск по всем данным
         function searchData() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
+            const searchClear = document.getElementById('searchClear');
+            
+            // Показываем/скрываем кнопку очистки
+            if (searchTerm) {
+                searchClear.classList.remove('hidden');
+            } else {
+                searchClear.classList.add('hidden');
+            }
             
             if (!searchTerm) {
                 filteredData = [...caladiums];
@@ -744,6 +763,13 @@
             } else {
                 populateDirectory(filteredData);
             }
+        }
+
+        // Очистка поиска
+        function clearSearch() {
+            document.getElementById('search').value = '';
+            document.getElementById('searchClear').classList.add('hidden');
+            searchData();
         }
 
         // Переключение между таблицей и каталогом
@@ -777,6 +803,9 @@
 
             // Обработчик поиска
             document.getElementById('search').addEventListener('input', searchData);
+            
+            // Обработчик очистки поиска
+            document.getElementById('searchClear').addEventListener('click', clearSearch);
 
             // Инициализация кнопок переключения вида
             document.getElementById('tableViewBtn').addEventListener('click', () => toggleView('table'));
