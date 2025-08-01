@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс "Геологическое моделирование"</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+        h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            flex: 1 1 300px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stage {
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .stage h3 {
+            margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .stage h3:after {
+            content: "+";
+            font-size: 20px;
+        }
+        .stage h3.active:after {
+            content: "-";
+        }
+        .stage-content {
+            display: none;
+            padding-top: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .tag.rus {
+            background-color: #27ae60;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Курс лекций "Геологическое моделирование"</h1>
+        <p>Систематизированное изучение процесса построения цифровых геологических моделей</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Основные сведения</h2>
+            <p><strong>Цель:</strong> Дать систематизированное понимание процесса построения цифровых геологических моделей.</p>
+            <p><strong>Аудитория:</strong> Студенты старших курсов, магистранты, аспиранты, молодые специалисты.</p>
+            <p><strong>Продолжительность:</strong> 14 лекций (7 недель) + практические занятия.</p>
+            
+            <h3>Типы моделей:</h3>
+            <span class="tag">Структурные</span>
+            <span class="tag">Литолого-фациальные</span>
+            <span class="tag">ФЕС</span>
+            <span class="tag">Геомеханические</span>
+            <span class="tag">Гидродинамические</span>
+            
+            <h3>Международное ПО:</h3>
+            <span class="tag">Petrel</span>
+            <span class="tag">RMS</span>
+            <span class="tag">SKUA/GOCAD</span>
+            <span class="tag">MOVE</span>
+            
+            <h3>Российское ПО:</h3>
+            <span class="tag rus">ГеоМап</span>
+            <span class="tag rus">ГЕОС</span>
+            <span class="tag rus">ГЕОМОД</span>
+            <span class="tag rus">ГЕОМИКС</span>
+            <span class="tag rus">РУСЬ</span>
+            <span class="tag rus">ГЕОРАДАР</span>
+        </div>
+
+        <div class="card">
+            <h2>Этапы моделирования</h2>
+            
+            <div class="stage">
+                <h3>1. Подготовка и анализ данных</h3>
+                <div class="stage-content">
+                    <p><strong>Задачи:</strong> Сбор, контроль качества и интерпретация всех доступных данных.</p>
+                    <p><strong>Входные данные:</strong></p>
+                    <ul>
+                        <li>Геолого-геофизические данные: сейсмика, структурные карты</li>
+                        <li>Скважинные данные: каротаж, керн, испытания</li>
+                        <li>Данные о породах-коллекторах и флюидах</li>
+                        <li>Геологическая концепция</li>
+                    </ul>
+                    <p><strong>Процессы:</strong> Загрузка данных, контроль качества, интеграция, предварительный анализ.</p>
+                    <p><strong>Выходные данные:</strong> Проверенный набор данных, уточненная геологическая концепция.</p>
+                </div>
+            </div>
+            
+            <div class="stage">
+                <h3>2. Структурный каркас</h3>
+                <div class="stage-content">
+                    <p><strong>Задачи:</strong> Создание цифрового представления геометрии изучаемого объекта.</p>
+                    <p><strong>Процессы:</strong></p>
+                    <ul>
+                        <li>Интерпретация сейсмических данных</li>
+                        <li>Корреляция скважинных данных</li>
+                        <li>Построение поверхностей горизонтов и разломов</li>
+                        <li>Создание 3D сетки</li>
+                    </ul>
+                    <p><strong>Выходные данные:</strong> 3D структурная модель с поверхностями горизонтов, разломами и стратифицированной сеткой.</p>
+                </div>
+            </div>
+            
+            <div class="stage">
+                <h3>3. Литолого-фациальная модель</h3>
+                <div class="stage-content">
+                    <p><strong>Задачи:</strong> Распределение типов горных пород в объеме модели.</p>
+                    <p><strong>Методы:</strong></p>
+                    <ul>
+                        <li>Детерминированные: картирование по данным скважин/сейсмики</li>
+                        <li>Стохастические:
+                            <ul>
+                                <li>Объектное моделирование (русла, бары, рифы)</li>
+                                <li>Имитация последовательности индикаторов</li>
+                                <li>Многточечная статистика</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><strong>Выходные данные:</strong> 3D модель распределения литофаций/петротипов.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="stage">
+                <h3>4. Модель ФЕС</h3>
+                <div class="stage-content">
+                    <p><strong>Задачи:</strong> Распределение пористости, проницаемости, насыщенности.</p>
+                    <p><strong>Процессы:</strong></p>
+                    <ul>
+                        <li>Анализ данных по керну и ГИС</li>
+                        <li>Распределение пористости (статистические методы, сейсмические атрибуты)</li>
+                        <li>Распределение проницаемости (петрофизические зависимости)</li>
+                        <li>Распределение насыщенности (капиллярные кривые, J-функции)</li>
+                        <li>Апскейлинг для ГДМ</li>
+                    </ul>
+                    <p><strong>Выходные данные:</strong> 3D модели ФЕС, апскейленные свойства.</p>
+                </div>
+            </div>
+            
+            <div class="stage">
+                <h3>5. Анализ неопределенностей</h3>
+                <div class="stage-content">
+                    <p><strong>Задачи:</strong> Оценка достоверности и диапазона неопределенностей модели.</p>
+                    <p><strong>Процессы:</strong></p>
+                    <ul>
+                        <li>Анализ чувствительности</li>
+                        <li>Анализ неопределенностей (множественные реализации)</li>
+                        <li>Верификация (сравнение с исходными данными)</li>
+                        <li>Валидация (соответствие внешним данным)</li>
+                        <li>Выбор "оптимальной" реализации</li>
+                    </ul>
+                    <p><strong>Выходные данные:</strong> Оценка неопределенностей, отчет о верификации.</p>
+                </div>
+            </div>
+            
+            <div class="stage">
+                <h3>6. Итерации и обновление</h3>
+                <div class="stage-content">
+                    <p><strong>Задачи:</strong> Включение новых данных и уточнение модели.</p>
+                    <p><strong>Процессы:</strong></p>
+                    <ul>
+                        <li>Анализ результатов верификации/ГДМ</li>
+                        <li>Сбор новых данных (бурение, сейсморазведка)</li>
+                        <li>Возврат к предыдущим этапам для пересмотра</li>
+                        <li>Построение обновленной версии</li>
+                    </ul>
+                    <p><strong>Выходные данные:</strong> Актуальная, уточненная геологическая модель.</p>
+                </div>
+            </div>
+            
+            <div class="stage">
+                <h3>7. Использование модели</h3>
+                <div class="stage-content">
+                    <p><strong>Применение:</strong></p>
+                    <ul>
+                        <li>Подсчет запасов</li>
+                        <li>Построение гидродинамических моделей</li>
+                        <li>Планирование геологоразведочных работ</li>
+                        <li>Анализ рисков</li>
+                        <li>Визуализация геологического строения</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Ключевые вызовы</h2>
+    <div class="container">
+        <div class="card">
+            <h3>Данные</h3>
+            <ul>
+                <li>Неполнота данных</li>
+                <li>Противоречивость источников</li>
+                <li>Различное разрешение</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Моделирование</h3>
+            <ul>
+                <li>Переход от точек к 3D распределению</li>
+                <li>Выбор адекватных алгоритмов</li>
+                <li>Интеграция разнородных данных</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Верификация</h3>
+            <ul>
+                <li>Субъективность экспертной оценки</li>
+                <li>Вычислительные затраты</li>
+                <li>Управление неопределенностями</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Программа курса разработана для глубокого изучения геологического моделирования</p>
+        <p>© 2023 | Все права защищены</p>
+    </div>
+
+    <script>
+        document.querySelectorAll('.stage h3').forEach(header => {
+            header.addEventListener('click', () => {
+                header.classList.toggle('active');
+                const content = header.nextElementSibling;
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    content.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
