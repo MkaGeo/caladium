@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Общие стили */
+        /* Обновленные стили с учетом мобильной оптимизации */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         body {
@@ -19,9 +19,10 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
         
-        /* Шапка */
+        /* Шапка с гамбургер-меню */
         .header {
             position: sticky;
             top: 0;
@@ -30,9 +31,58 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 10px;
+        }
+        
+        /* Боковое меню */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+            display: none;
+        }
+        
+        .sidebar-overlay.active {
+            display: block;
+        }
+        
+        .sidebar-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
         /* Hero Banner */
         .hero-banner {
-            height: 20vh; /* Уменьшил в 2 раза */
+            height: 15vh;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -111,15 +161,15 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            table-layout: fixed; /* Фиксированная ширина колонок */
+            table-layout: fixed;
         }
         
         th, td {
-            padding: 8px 10px; /* Уменьшил отступы */
+            padding: 8px 10px;
             text-align: left;
             border-bottom: 1px solid #e5e7eb;
-            vertical-align: top; /* Выравнивание по верхнему краю */
-            word-wrap: break-word; /* Перенос длинных слов */
+            vertical-align: top;
+            word-wrap: break-word;
         }
         
         th {
@@ -128,23 +178,23 @@
             font-weight: 500;
             position: sticky;
             top: 0;
-            white-space: nowrap; /* Заголовки в одну строку */
+            white-space: nowrap;
         }
         
         /* Фиксированные ширины для колонок */
-        th:nth-child(1), td:nth-child(1) { width: 5%; } /* ID */
-        th:nth-child(2), td:nth-child(2) { width: 20%; } /* Сорт */
-        th:nth-child(3), td:nth-child(3) { width: 15%; } /* Патент */
-        th:nth-child(4), td:nth-child(4) { width: 10%; } /* Высота */
-        th:nth-child(5), td:nth-child(5) { width: 10%; } /* Ширина листа */
-        th:nth-child(6), td:nth-child(6) { width: 10%; } /* Изображение */
+        th:nth-child(1), td:nth-child(1) { width: 5%; }
+        th:nth-child(2), td:nth-child(2) { width: 20%; }
+        th:nth-child(3), td:nth-child(3) { width: 15%; }
+        th:nth-child(4), td:nth-child(4) { width: 10%; }
+        th:nth-child(5), td:nth-child(5) { width: 10%; }
+        th:nth-child(6), td:nth-child(6) { width: 10%; }
         
         tr:hover {
             background-color: #f3f4f6;
         }
         
         tr.selected {
-            background-color: #e9ecef; /* Сделал выделение светлее */
+            background-color: #e9ecef;
             color: inherit;
         }
         
@@ -258,7 +308,17 @@
         }
         
         /* Адаптивность */
+        @media (max-width: 1024px) {
+            .left-panel, .right-panel {
+                width: 50%;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
             .main-container {
                 flex-direction: column;
             }
@@ -268,143 +328,187 @@
             }
             
             .right-panel {
-                display: none; /* Скрываем правую панель на мобильных */
+                display: none;
             }
             
             .hero-banner {
-                height: 20vh;
+                height: 15vh;
             }
             
             .view-toggle {
-                display: none !important;
+                display: none;
             }
             
             #tableView {
-                display: none !important; /* Скрываем таблицу на мобильных */
+                display: none;
             }
             
             #directoryView {
-                display: block !important;
+                display: block;
+            }
+            
+            /* Улучшения для мобильных */
+            .directory-item {
+                padding: 15px;
+            }
+            
+            .directory-item-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .search-container {
+                padding: 10px;
+            }
+            
+            .header-buttons {
+                font-size: 14px;
+                padding: 8px 12px;
             }
         }
         
-        /* Дополнительные стили */
-        .feature-item strong {
-            display: inline-block;
-            min-width: 150px;
-            color: #2c3e50;
+        @media (max-width: 480px) {
+            .hero-banner {
+                height: 12vh;
+            }
+            
+            .directory-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .directory-item-image {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                height: auto;
+                max-height: 120px;
+            }
+            
+            .scroll-container {
+                padding: 10px;
+            }
         }
         
-        .no-features {
-            color: #6c757d;
-            text-align: center;
-            padding: 20px;
+        /* Стили для кнопок*/
+        .header-buttons {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background-color: white;
+            color: #374151;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        .header-buttons:hover {
+            background-color: #f9fafb;
+            border-color: #9ca3af;
+        }
+        .header-buttons i {
+            margin-right: 0.5rem;
         }
         
-        .view-toggle {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 10px;
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .view-toggle button {
-            padding: 8px 16px;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 4px;
+        /* Стили для бокового меню */
+        .sidebar-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
             cursor: pointer;
+            transition: background-color 0.2s;
         }
         
-        .mobile-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 20px;
+        .sidebar-item:hover {
+            background-color: #f3f4f6;
         }
         
-        .mobile-modal.active {
-            display: block;
+        .sidebar-item.active {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-weight: 600;
         }
-        
-        .mobile-modal-content {
-            max-width: 100%;
-        }
-        
-        .mobile-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        .thumbnail {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-		
- /* Стили для кнопок*/
-    .header-buttons {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        border: 1px solid #d1d5db;
-        border-radius: 0.375rem;
-        background-color: white;
-        color: #374151;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        text-decoration: none;
-    }
-    .header-buttons:hover {
-        background-color: #f9fafb;
-        border-color: #9ca3af;
-    }
-    .header-buttons i {
-        margin-right: 0.5rem;
-    }
     </style>
 </head>
 <body>
-    <!-- Шапка -->
-<header class="header">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <img src="https://cdn.store.link/uploads/store14587/store-logo.jpg?versionId=KnvYooNJLl6yuLhukJB6ZxjlkYfEW3hV" alt="CaladiumHome Logo" class="h-10 w-auto">
-            <h1 class="text-xl font-bold text-gray-800">CaladiumHome</h1>
+    <!-- Шапка с гамбургер-меню -->
+    <header class="header">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <img src="https://cdn.store.link/uploads/store14587/store-logo.jpg?versionId=KnvYooNJLl6yuLhukJB6ZxjlkYfEW3hV" alt="CaladiumHome Logo" class="h-10 w-auto">
+                <h1 class="text-xl font-bold text-gray-800">CaladiumHome</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="https://teletype.in/@geobyf/Uhod-za-kaladiumom" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                    <i class="fas fa-seedling mr-2 text-green-600"></i>
+                    Уход за каладиумами
+                </a>
+                <a href="https://t.me/caladiums" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                    <i class="fab fa-telegram mr-2 text-blue-500"></i>
+                    CaladiumHome
+                </a>
+            </div>
         </div>
-        <div class="flex items-center space-x-3">
-            <a href="https://teletype.in/@geobyf/Uhod-za-kaladiumom" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
-                <i class="fas fa-seedling mr-2 text-green-600"></i>
-                Уход за каладиумами
-            </a>
-            <a href="https://t.me/caladiums" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
-                <i class="fab fa-telegram mr-2 text-blue-500"></i>
-                CaladiumHome
-            </a>
+    </header>
+
+    <!-- Боковое меню -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-close" id="sidebarClose">
+            <i class="fas fa-times"></i>
+        </div>
+        <h2 class="text-xl font-bold mb-6 text-gray-800">Меню</h2>
+        
+        <div class="mb-6">
+            <input type="text" id="sidebarSearch" placeholder="Поиск сорта..." class="w-full px-4 py-2 border rounded">
+        </div>
+        
+        <div class="sidebar-item" id="viewDirectory">
+            <i class="fas fa-list mr-2"></i> Просмотр каталога
+        </div>
+        <div class="sidebar-item" id="viewTable">
+            <i class="fas fa-table mr-2"></i> Просмотр таблицы
+        </div>
+        <div class="sidebar-item" id="viewFavorites">
+            <i class="fas fa-star mr-2"></i> Избранные сорта
+        </div>
+        
+        <div class="mt-8">
+            <h3 class="font-semibold mb-3">Ресурсы</h3>
+            <div class="sidebar-item">
+                <i class="fas fa-seedling mr-2 text-green-600"></i> Уход за каладиумами
+            </div>
+            <div class="sidebar-item">
+                <i class="fab fa-telegram mr-2 text-blue-500"></i> CaladiumHome в Telegram
+            </div>
+        </div>
+        
+        <div class="mt-8">
+            <h3 class="font-semibold mb-3">Настройки</h3>
+            <div class="sidebar-item">
+                <i class="fas fa-moon mr-2"></i> Темная тема
+            </div>
+            <div class="sidebar-item">
+                <i class="fas fa-text-size mr-2"></i> Размер текста
+            </div>
         </div>
     </div>
-</header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- Hero Banner (уменьшен в 2 раза) -->
+    <!-- Hero Banner -->
     <section class="hero-banner" style="background-image: url('https://cdn.store.link/products/store14587/r8m5q8-1738617436308.jpg?versionId=TYf9HDxK2ZyBVN8tNrEIp3hK6Du28V8X')">
         <div class="hero-overlay absolute inset-0 flex items-center justify-center">
             <div class="text-center px-4">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Каталог классических сортов каладиумов</h2>
-                <p class="text-md text-gray-700">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Каталог классических сортов каладиумов</h2>
+                <p class="text-sm md:text-md text-gray-700">
                     🍃 Актуальный перечень 2025
                 </p>
             </div>
@@ -425,8 +529,8 @@
                 </div>
             </div>
             
-            <!-- Переключение вида -->
-            <div class="view-toggle">
+            <!-- Переключение вида (скрыто на мобильных) -->
+            <div class="view-toggle hidden md:flex">
                 <button id="directoryViewBtn" class="active">
                     <i class="fas fa-list"></i> Каталог
                 </button>
@@ -446,8 +550,8 @@
                                     <th class="sortable" data-sort="ID">ID</th>
                                     <th class="sortable" data-sort="Сорт">Сорт</th>
                                     <th class="sortable" data-sort="Патент">Патент</th>
-                                    <th class="sortable" data-sort="Высота (см)">Высота (см)</th>
-                                    <th class="sortable" data-sort="Ширина листа (см)">Ширина листа (см)</th>
+                                    <th class="sortable" data-sort="Высота (см)">Высота</th>
+                                    <th class="sortable" data-sort="Ширина листа (см)">Ширина</th>
                                     <th>Изображение</th>
                                 </tr>
                             </thead>
@@ -495,7 +599,7 @@
     </div>
 
     <script>
-       // Парсинг CSV данных
+        // Парсинг CSV данных
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length === 0) return [];
@@ -532,53 +636,51 @@
         let sortDirection = 1;
         let currentView = 'directory';
 
-        // Загрузка данных из внешнего CSV файла
-    // Загрузка данных из внешнего CSV файла на GitHub
-    async function loadCSVData() {
-        try {
-            // Используем raw-ссылку на GitHub
-            const response = await fetch('https://raw.githubusercontent.com/MkaGeo/caladium/main/All_caladiums.csv');
-            
-            if (!response.ok) {
-                throw new Error(`Ошибка загрузки CSV файла: ${response.status} ${response.statusText}`);
-            }
-            
-            const csvText = await response.text();
-            caladiums = parseCSV(csvText);
-            filteredData = [...caladiums];
-            
-            // Инициализация интерфейса после загрузки данных
-            initAfterDataLoad();
-        } catch (error) {
-            console.error('Ошибка при загрузке данных:', error);
-            // Показать сообщение об ошибке пользователю
-            const directoryContent = document.getElementById('directoryContent');
-            if (directoryContent) {
-                directoryContent.innerHTML = `
-                    <div class="p-4 text-red-600">
-                        Ошибка загрузки данных: ${error.message}.<br>
-                        Проверьте доступность файла по ссылке:<br>
-                        <a href="https://raw.githubusercontent.com/MkaGeo/caladium/main/All_caladiums.csv" 
-                           target="_blank" 
-                           class="text-blue-600 underline">
-                            https://raw.githubusercontent.com/MkaGeo/caladium/main/All_caladiums.csv
-                        </a>
-                    </div>
-                `;
-            }
-            
-            const tableBody = document.getElementById('tableBody');
-            if (tableBody) {
-                tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="text-center p-4 text-red-600">
-                            Ошибка загрузки данных: ${error.message}
-                        </td>
-                    </tr>
-                `;
+        // Загрузка данных из внешнего CSV файла на GitHub
+        async function loadCSVData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/MkaGeo/caladium/main/All_caladiums.csv');
+                
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки CSV файла: ${response.status} ${response.statusText}`);
+                }
+                
+                const csvText = await response.text();
+                caladiums = parseCSV(csvText);
+                filteredData = [...caladiums];
+                
+                // Инициализация интерфейса после загрузки данных
+                initAfterDataLoad();
+            } catch (error) {
+                console.error('Ошибка при загрузке данных:', error);
+                // Показать сообщение об ошибке пользователю
+                const directoryContent = document.getElementById('directoryContent');
+                if (directoryContent) {
+                    directoryContent.innerHTML = `
+                        <div class="p-4 text-red-600">
+                            Ошибка загрузки данных: ${error.message}.<br>
+                            Проверьте доступность файла по ссылке:<br>
+                            <a href="https://raw.githubusercontent.com/MkaGeo/caladium/main/All_caladiums.csv" 
+                               target="_blank" 
+                               class="text-blue-600 underline">
+                                https://raw.githubusercontent.com/MkaGeo/caladium/main/All_caladiums.csv
+                            </a>
+                        </div>
+                    `;
+                }
+                
+                const tableBody = document.getElementById('tableBody');
+                if (tableBody) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center p-4 text-red-600">
+                                Ошибка загрузки данных: ${error.message}
+                            </td>
+                        </tr>
+                    `;
+                }
             }
         }
-    }
 
         // Инициализация после загрузки данных
         function initAfterDataLoad() {
@@ -642,7 +744,6 @@
                 }
                 
                 data.forEach(item => {
-                    //if (!item['Сорт'] || item['Visibility'] === '0') return;
                     const row = document.createElement('tr');
                     row.dataset.id = item['ID'];
                     
@@ -1065,6 +1166,44 @@
                 document.getElementById('tableViewBtn').style.display = 'block';
             }
         });
+
+        // Управление боковым меню
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('sidebarOverlay').classList.add('active');
+        });
+        
+        document.getElementById('sidebarClose').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        });
+        
+        document.getElementById('sidebarOverlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            this.classList.remove('active');
+        });
+        
+        // Поиск в боковом меню
+        document.getElementById('sidebarSearch').addEventListener('input', function() {
+            document.getElementById('search').value = this.value;
+            searchData();
+        });
+        
+        // Переключение вида из бокового меню
+        document.getElementById('viewDirectory').addEventListener('click', function() {
+            toggleView('directory');
+            closeSidebar();
+        });
+        
+        document.getElementById('viewTable').addEventListener('click', function() {
+            toggleView('table');
+            closeSidebar();
+        });
+        
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
 
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
