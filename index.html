@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -246,7 +246,11 @@
         .modal-info {
             color: white;
             margin-top: 20px;
-            max-width: 80%;
+            max-width: 90%;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
         }
         
         .close {
@@ -543,37 +547,81 @@
             color: #6b7280;
             margin-top: 4px;
         }
+        
+        /* Стили для модального окна с информацией */
+        .modal-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-info .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .modal-info .info-item {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        
+        .modal-info .info-item strong {
+            color: #93c5fd;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .modal-info .info-item span {
+            font-size: 1.1rem;
+            display: block;
+            word-break: break-word;
+        }
+        
+        .modal-info a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        
+        .modal-info a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <!-- Шапка с гамбургер-меню -->
-		<header class="header">
-			<div class="container mx-auto px-4 py-3 flex justify-between items-center">
-				<div class="flex items-center space-x-2">
-					<div class="menu-toggle" id="menuToggle">
-						<i class="fas fa-bars"></i>
-					</div>
-					<img src="https://cdn.store.link/uploads/store14587/store-logo.jpg?versionId=KnvYooNJLl6yuLhukJB6ZxjlkYfEW3hV" alt="CaladiumHome Logo" class="h-10 w-auto">
-					<h1 class="text-xl font-bold text-gray-800">CaladiumHome</h1>
-				</div>
-				<!-- Добавленная иконка Telegram для мобильной версии -->
-				<div class="flex md:hidden items-center">
-					<a href="https://t.me/caladiums" target="_blank" class="text-blue-500 hover:text-blue-700 ml-4">
-						<i class="fab fa-telegram text-2xl"></i>
-					</a>
-				</div>
-				<div class="hidden md:flex items-center space-x-3">
-					<a href="https://teletype.in/@geobyf/Uhod-za-kaladiumom" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
-						<i class="fas fa-seedling mr-2 text-green-600"></i>
-						Уход за каладиумами
-					</a>
-					<a href="https://t.me/caladiums" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
-						<i class="fab fa-telegram mr-2 text-blue-500"></i>
-						CaladiumHome
-					</a>
-				</div>
-			</div>
-		</header>
+    <!-- Шапка с гамбургер-меню и иконкой Telegram для мобильных -->
+    <header class="header">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <img src="https://cdn.store.link/uploads/store14587/store-logo.jpg?versionId=KnvYooNJLl6yuLhukJB6ZxjlkYfEW3hV" alt="CaladiumHome Logo" class="h-10 w-auto">
+                <h1 class="text-xl font-bold text-gray-800">CaladiumHome</h1>
+            </div>
+            
+            <!-- Иконка Telegram для мобильной версии -->
+            <div class="flex md:hidden items-center">
+                <a href="https://t.me/caladiums" target="_blank" class="text-blue-500 hover:text-blue-700 ml-4">
+                    <i class="fab fa-telegram text-2xl"></i>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="https://teletype.in/@geobyf/Uhod-za-kaladiumom" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                    <i class="fas fa-seedling mr-2 text-green-600"></i>
+                    Уход за каладиумами
+                </a>
+                <a href="https://t.me/caladiums" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
+                    <i class="fab fa-telegram mr-2 text-blue-500"></i>
+                    CaladiumHome
+                </a>
+            </div>
+        </div>
+    </header>
 
     <!-- Боковое меню -->
     <div class="sidebar" id="sidebar">
@@ -1098,11 +1146,44 @@
                 
                 modal.style.display = 'block';
                 modalImg.src = item['Ссылка на изображение'];
-                modalInfo.innerHTML = `
+                
+                // Создаем HTML для отображения всех полей
+                let infoHTML = `
                     <h3>${item['Сорт']}</h3>
-                    <p>${item['Окрас']}</p>
-                    <p>${item['Селекционная линия'] || ''}</p>
-                `;
+                    <div class="info-grid">`;
+                
+                // Список полей для отображения
+                const fields = [
+                    'ID', 'Селекционная линия', 'Год', 'Селекционер', 'Патент', 
+                    'Высота (см)', 'Ширина листа (см)', 'Форма листа', 'Окрас', 
+                    'Устойчивость к солнцу', 'Особенности', 'Историческая справка'
+                ];
+                
+                // Перебираем все важные поля
+                fields.forEach(field => {
+                    if (item[field]) {
+                        // Обработка патента со ссылкой
+                        if (field === 'Патент' && item['Ссылка на патент']) {
+                            infoHTML += `
+                                <div class="info-item">
+                                    <strong>${field}:</strong>
+                                    <a href="${item['Ссылка на патент']}" target="_blank">
+                                        ${item[field]}
+                                    </a>
+                                </div>`;
+                        } else {
+                            infoHTML += `
+                                <div class="info-item">
+                                    <strong>${field}:</strong>
+                                    <span>${item[field]}</span>
+                                </div>`;
+                        }
+                    }
+                });
+                
+                infoHTML += `</div>`;
+                
+                modalInfo.innerHTML = infoHTML;
                 
                 // Закрытие модального окна
                 document.querySelector('.close').onclick = function() {
