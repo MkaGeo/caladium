@@ -287,6 +287,25 @@
             margin-top: 4px;
         }
         
+        .directory-item-collection {
+            font-size: 0.85em;
+            margin-top: 4px;
+            text-align: right;
+        }
+        
+        .in-collection {
+            color: #28a745;
+            text-decoration: none;
+        }
+        
+        .in-collection:hover {
+            text-decoration: underline;
+        }
+        
+        .not-in-collection {
+            color: #dc3545;
+        }
+        
         .directory-item-image {
             width: 60px;
             height: 60px;
@@ -1001,6 +1020,24 @@
                         patentElement.textContent = item['Патент'] || 'Без патента';
                         itemContent.appendChild(patentElement);
                         
+                        // Наличие в коллекции
+                        const collectionElement = document.createElement('div');
+                        collectionElement.className = 'directory-item-collection';
+                        
+                        if (item['CaladiumHome'] === '1') {
+                            const link = document.createElement('a');
+                            link.href = `https://t.me/geobyf?text=Запрос_на_наличие_${encodeURIComponent(item['Сорт'])}`;
+                            link.target = '_blank';
+                            link.className = 'in-collection';
+                            link.innerHTML = '<i class="fas fa-check-circle"></i> Есть в коллекции';
+                            collectionElement.appendChild(link);
+                        } else {
+                            collectionElement.className += ' not-in-collection';
+                            collectionElement.innerHTML = '<i class="far fa-times-circle"></i> Нет в коллекции';
+                        }
+                        
+                        itemContent.appendChild(collectionElement);
+                        
                         itemElement.appendChild(itemContent);
                         
                         // Миниатюра изображения (размер увеличен по шаблону)
@@ -1066,6 +1103,23 @@
                 const featuresFrame = document.getElementById('featuresFrame');
                 
                 if (item) {
+                    let collectionHtml;
+                    if (item['CaladiumHome'] === '1') {
+                        collectionHtml = `
+                            <a href="https://t.me/geobyf?text=Запрос_на_наличие_${encodeURIComponent(item['Сорт'])}" 
+                               target="_blank" 
+                               class="in-collection">
+                                <i class="fas fa-check-circle"></i> Есть в коллекции
+                            </a>
+                        `;
+                    } else {
+                        collectionHtml = `
+                            <span class="not-in-collection">
+                                <i class="far fa-times-circle"></i> Нет в коллекции
+                            </span>
+                        `;
+                    }
+                    
                     featuresFrame.innerHTML = `
                         <h2 class="text-2xl font-bold mb-4">${item['Сорт']}</h2>
                         
@@ -1081,6 +1135,7 @@
                         <div class="feature-item"><strong>Форма листа:</strong> ${item['Форма листа']}</div>
                         <div class="feature-item"><strong>Окрас:</strong> ${item['Окрас']}</div>
                         <div class="feature-item"><strong>Устойчивость к солнцу:</strong> ${item['Устойчивость к солнцу']}</div>
+                        <div class="feature-item"><strong>В коллекции:</strong> ${collectionHtml}</div>
                         
                         ${item['Особенности'] ? `<h3 class="text-xl font-semibold mt-6 mb-2">Особенности</h3><p class="mb-4">${item['Особенности']}</p>` : ''}
                         ${item['Историческая справка'] ? `<h3 class="text-xl font-semibold mt-6 mb-2">Историческая справка</h3><p class="mb-4">${item['Историческая справка']}</p>` : ''}
@@ -1122,6 +1177,23 @@
                 const modal = document.getElementById('mobileModal');
                 const modalContent = document.getElementById('mobileModalContent');
                 
+                let collectionHtml;
+                if (item['CaladiumHome'] === '1') {
+                    collectionHtml = `
+                        <a href="https://t.me/geobyf?text=Запрос_на_наличие_${encodeURIComponent(item['Сорт'])}" 
+                           target="_blank" 
+                           class="in-collection">
+                            <i class="fas fa-check-circle"></i> Есть в коллекции
+                        </a>
+                    `;
+                } else {
+                    collectionHtml = `
+                        <span class="not-in-collection">
+                            <i class="far fa-times-circle"></i> Нет в коллекции
+                        </span>
+                    `;
+                }
+                
                 modalContent.innerHTML = `
                     <h2 class="text-2xl font-bold mb-4">${item['Сорт']}</h2>
                     
@@ -1137,6 +1209,7 @@
                     <div class="feature-item"><strong>Форма листа:</strong> ${item['Форма листа']}</div>
                     <div class="feature-item"><strong>Окрас:</strong> ${item['Окрас']}</div>
                     <div class="feature-item"><strong>Устойчивость к солнцу:</strong> ${item['Устойчивость к солнцу']}</div>
+                    <div class="feature-item"><strong>В коллекции:</strong> ${collectionHtml}</div>
                     
                     ${item['Особенности'] ? `<h3 class="text-xl font-semibold mt-6 mb-2">Особенности</h3><p class="mb-4">${item['Особенности']}</p>` : ''}
                     ${item['Историческая справка'] ? `<h3 class="text-xl font-semibold mt-6 mb-2">Историческая справка</h3><p class="mb-4">${item['Историческая справка']}</p>` : ''}
