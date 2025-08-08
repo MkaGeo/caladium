@@ -261,20 +261,29 @@
         
         /* Каталог - обновлено по шаблону */
         .directory-item {
-            padding: 12px 15px;
+            padding: 15px;
             border-bottom: 1px solid #e5e7eb;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
         }
         
         .directory-item:hover {
-            background-color: #f3f4f6;
+            background-color: #f8fafc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
         
         .directory-item.selected {
             background-color: #e9ecef;
+            border-left: 3px solid #2c3e50;
         }
         
         .directory-item-content {
@@ -289,41 +298,82 @@
         
         .directory-item-collection {
             font-size: 0.85em;
-            margin-top: 4px;
+            margin-top: 8px;
             text-align: right;
         }
         
         .in-collection {
-            color: #28a745;
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 20px;
             text-decoration: none;
+            font-size: 0.8em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
         }
         
         .in-collection:hover {
-            text-decoration: underline;
+            background-color: #218838;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .in-collection::after {
+            content: "Запросить наличие";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .in-collection:hover::after {
+            opacity: 1;
         }
         
         .not-in-collection {
-            color: #dc3545;
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8em;
+            border: 1px solid #e5e7eb;
         }
         
         .directory-item-image {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             margin-left: 15px;
-            border-radius: 4px;
+            border-radius: 6px;
             object-fit: cover;
             background-color: #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .letter-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .letter-group h3 {
             color: #2c3e50;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             border-bottom: 2px solid #2c3e50;
+            font-size: 1.2em;
+            padding-left: 5px;
         }
         
         /* Адаптивность */
@@ -387,6 +437,13 @@
             
             .search-container {
                 padding: 10px;
+            }
+            
+            .in-collection::after {
+                top: auto;
+                bottom: -30px;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
         
@@ -562,6 +619,53 @@
             color: #6b7280;
             margin-top: 4px;
         }
+        
+        /* Новый раздел в боковом меню */
+        .care-programs {
+            margin-top: 25px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+        }
+        
+        .care-programs h3 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .program-card {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            transition: all 0.3s ease;
+        }
+        
+        .program-card:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+        
+        .program-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 12px;
+            background: #dbeafe;
+            color: #3b82f6;
+        }
+        
+        .program-title {
+            font-weight: 500;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -623,6 +727,32 @@
                     <div class="resource-title">CaladiumHome в Telegram</div>
                     <div class="resource-desc">Сообщество коллекционеров</div>
                 </div>
+            </a>
+        </div>
+        
+        <!-- Программы ухода -->
+        <div class="care-programs">
+            <h3 class="font-semibold mb-4 text-lg text-gray-800 border-b pb-2">Программы ухода</h3>
+            
+            <a href="https://github.com/MkaGeo/caladium/blob/main/leaf_size.html" target="_blank" class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="program-title">Увеличение размера листьев</div>
+            </a>
+            
+            <a href="https://github.com/MkaGeo/caladium/blob/main/size_tuber.html" target="_blank" class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="program-title">Увеличение материнского клубня</div>
+            </a>
+            
+            <a href="https://github.com/MkaGeo/caladium/blob/main/daughter_tuber.html" target="_blank" class="program-card">
+                <div class="program-icon">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+                <div class="program-title">Стимуляция роста дочерних клубеньков</div>
             </a>
         </div>
     </div>
@@ -717,7 +847,7 @@
         </div>
     </div>
     
-    <!-- Модальное окно для мобильной версии -->
+    <!-- Мобильное модальное окно -->
     <div id="mobileModal" class="mobile-modal">
         <div class="mobile-modal-close" onclick="closeMobileModal()">&times;</div>
         <div class="mobile-modal-content" id="mobileModalContent"></div>
@@ -1012,6 +1142,7 @@
                         // Название сорта
                         const nameElement = document.createElement('div');
                         nameElement.textContent = item['Сорт'];
+                        nameElement.style.fontWeight = '500';
                         itemContent.appendChild(nameElement);
                         
                         // Патент
@@ -1040,7 +1171,7 @@
                         
                         itemElement.appendChild(itemContent);
                         
-                        // Миниатюра изображения (размер увеличен по шаблону)
+                        // Миниатюра изображения
                         if (item['Ссылка на изображение']) {
                             const imgElement = document.createElement('img');
                             imgElement.className = 'directory-item-image';
@@ -1054,6 +1185,10 @@
                         } else {
                             const placeholder = document.createElement('div');
                             placeholder.className = 'directory-item-image';
+                            placeholder.style.display = 'flex';
+                            placeholder.style.alignItems = 'center';
+                            placeholder.style.justifyContent = 'center';
+                            placeholder.innerHTML = '<i class="fas fa-seedling text-gray-400"></i>';
                             itemElement.appendChild(placeholder);
                         }
                         
@@ -1108,7 +1243,8 @@
                         collectionHtml = `
                             <a href="https://t.me/geobyf?text=Запрос_на_наличие_${encodeURIComponent(item['Сорт'])}" 
                                target="_blank" 
-                               class="in-collection">
+                               class="in-collection"
+                               title="Запросить наличие">
                                 <i class="fas fa-check-circle"></i> Есть в коллекции
                             </a>
                         `;
@@ -1182,7 +1318,8 @@
                     collectionHtml = `
                         <a href="https://t.me/geobyf?text=Запрос_на_наличие_${encodeURIComponent(item['Сорт'])}" 
                            target="_blank" 
-                           class="in-collection">
+                           class="in-collection"
+                           title="Запросить наличие">
                             <i class="fas fa-check-circle"></i> Есть в коллекции
                         </a>
                     `;
