@@ -388,7 +388,7 @@
                 display: block;
             }
             
-            .header-buttons {
+            .desktop-menu {
                 display: none;
             }
             
@@ -666,6 +666,68 @@
             color: #1e293b;
             font-size: 0.95rem;
         }
+        
+        /* Десктопное меню */
+        .desktop-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .desktop-menu-section {
+            position: relative;
+        }
+        
+        .desktop-menu-title {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .desktop-menu-title:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .desktop-menu-title i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .desktop-menu-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 280px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .desktop-menu-section:hover .desktop-menu-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .desktop-menu-divider {
+            border-top: 1px solid #e5e7eb;
+            margin: 10px 0;
+        }
+        
+        .desktop-menu-header {
+            font-weight: 600;
+            padding: 8px 12px;
+            color: #2c3e50;
+        }
     </style>
 </head>
 <body>
@@ -685,15 +747,64 @@
 						<i class="fab fa-telegram text-2xl"></i>
 					</a>
 				</div>
-				<div class="hidden md:flex items-center space-x-3">
-					<a href="https://teletype.in/@geobyf/Uhod-za-kaladiumom" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
-						<i class="fas fa-seedling mr-2 text-green-600"></i>
-						Уход за каладиумами
-					</a>
-					<a href="https://t.me/caladiums" target="_blank" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center">
-						<i class="fab fa-telegram mr-2 text-blue-500"></i>
-						CaladiumHome
-					</a>
+				<!-- Десктопное меню -->
+				<div class="desktop-menu hidden md:flex">
+				    <div class="desktop-menu-section">
+				        <div class="desktop-menu-title">
+				            Ресурсы <i class="fas fa-chevron-down"></i>
+				        </div>
+				        <div class="desktop-menu-dropdown">
+				            <div class="desktop-menu-header">Ресурсы</div>
+				            <a href="https://teletype.in/@geobyf/Uhod-za-kaladiumom" target="_blank" class="resource-card">
+                                <div class="resource-icon bg-green-100">
+                                    <i class="fas fa-seedling text-green-600"></i>
+                                </div>
+                                <div class="resource-content">
+                                    <div class="resource-title">Уход за каладиумами</div>
+                                    <div class="resource-desc">Руководство по выращиванию</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://t.me/caladiums" target="_blank" class="resource-card">
+                                <div class="resource-icon bg-blue-100">
+                                    <i class="fab fa-telegram text-blue-500"></i>
+                                </div>
+                                <div class="resource-content">
+                                    <div class="resource-title">CaladiumHome в Telegram</div>
+                                    <div class="resource-desc">Сообщество коллекционеров</div>
+                                </div>
+                            </a>
+				        </div>
+				    </div>
+				    
+				    <div class="desktop-menu-section">
+				        <div class="desktop-menu-title">
+				            Программы ухода <i class="fas fa-chevron-down"></i>
+				        </div>
+				        <div class="desktop-menu-dropdown">
+				            <div class="desktop-menu-header">Программы ухода</div>
+				            <a href="https://github.com/MkaGeo/caladium/blob/main/leaf_size.html" target="_blank" class="program-card">
+                                <div class="program-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="program-title">Увеличение размера листьев</div>
+                            </a>
+                            
+                            <a href="https://github.com/MkaGeo/caladium/blob/main/size_tuber.html" target="_blank" class="program-card">
+                                <div class="program-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="program-title">Увеличение материнского клубня</div>
+                            </a>
+                            
+                            <a href="https://github.com/MkaGeo/caladium/blob/main/daughter_tuber.html" target="_blank" class="program-card">
+                                <div class="program-icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <div class="program-title">Стимуляция роста дочерних клубеньков</div>
+                            </a>
+				        </div>
+				    </div>
 				</div>
 			</div>
 		</header>
@@ -734,21 +845,21 @@
         <div class="care-programs">
             <h3 class="font-semibold mb-4 text-lg text-gray-800 border-b pb-2">Программы ухода</h3>
             
-            <a href="https://mkageo.github.io/caladium/leaf_size.html" target="_blank" class="program-card">
+            <a href="https://github.com/MkaGeo/caladium/blob/main/leaf_size.html" target="_blank" class="program-card">
                 <div class="program-icon">
                     <i class="fas fa-leaf"></i>
                 </div>
                 <div class="program-title">Увеличение размера листьев</div>
             </a>
             
-            <a href="https://mkageo.github.io/caladium/size_tuber.html" target="_blank" class="program-card">
+            <a href="https://github.com/MkaGeo/caladium/blob/main/size_tuber.html" target="_blank" class="program-card">
                 <div class="program-icon">
                     <i class="fas fa-seedling"></i>
                 </div>
                 <div class="program-title">Увеличение материнского клубня</div>
             </a>
             
-            <a href="https://mkageo.github.io/caladium/daughter_tuber.html" target="_blank" class="program-card">
+            <a href="https://github.com/MkaGeo/caladium/blob/main/daughter_tuber.html" target="_blank" class="program-card">
                 <div class="program-icon">
                     <i class="fas fa-sitemap"></i>
                 </div>
