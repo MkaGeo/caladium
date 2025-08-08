@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уход за каладиумами</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Добавленные стили для выделения пункта меню */
+        .catalog-highlight {
+            position: relative;
+        }
+        
+        .catalog-highlight a {
+            background: linear-gradient(135deg, #ff8c00, #ff6a00);
+            color: white !important;
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .catalog-highlight a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #ff6a00, #ff4500);
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.6); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 140, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0); }
+        }
+
+        /* Остальные стили без изменений */
+        :root {
+            --primary: #4caf50;
+            --primary-dark: #388e3c;
+            --secondary: #ff9800;
+            --light: #f1f8e9;
+            --dark: #1b5e20;
+            --text: #333;
+            --light-bg: #e8f5e9;
+            --accent: #8bc34a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #fff;
+            background-image: 
+                radial-gradient(var(--accent) 1px, transparent 1px),
+                radial-gradient(var(--accent) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding-left: 0px; /* Место для кнопки "Назад" */
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+            white-space: nowrap;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://cdn.store.link/products/store14587/r8m5q8-1738617436308.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background: #ff8c00;
+        }
+        
+        .telegram-links {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem auto;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
+        
+        .telegram-links h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .telegram-card {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            transition: transform 0.3s;
+        }
+        
+        .telegram-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .telegram-card i {
+            font-size: 2.5rem;
+            color: #0088cc;
+            margin-bottom: 1rem;
+        }
+        
+        .telegram-card h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .telegram-card a {
+            display: inline-block;
+            background: #0088cc;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        section h2 {
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        section h3 {
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .warning {
+            background: #fff8e1;
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .columns {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .column {
+            flex: 1;
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .column h4 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-box {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .step-box h4 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .fertilizer {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .fertilizer h4 {
+            color: #0d47a1;
+            margin-bottom: 1rem;
+        }
+        
+        .image-container {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+        
+        .image-caption {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        
+        .image-columns {
+            display: flex;
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 992px) {
+            .header-content {
+                padding-left: 110px; /* Немного уменьшаем отступ */
+            }
+            
+            .logo h1 {
+                font-size: 1.4rem; /* Уменьшаем размер заголовка */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding-top: 2rem;
+                padding-left: 10;
+                text-align: center;
+            }
+            
+            .back-btn {
+                position: static;
+                transform: none;
+                margin-bottom: 1rem;
+                display: inline-flex;
+                align-self: center;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .image-columns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .image-container img {
+                max-height: 300px;
+            }
+            
+            /* Адаптация для выделенного пункта меню */
+            .catalog-highlight a {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .image-container img {
+                max-height: 250px;
+            }
+            
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                gap: 0.8rem;
+            }
+            
+            nav a {
+                padding: 4px 8px;
+                font-size: 0.9rem;
+            }
+            
+            /* Адаптация для выделенного пункта меню */
+            .catalog-highlight a {
+                padding: 5px 10px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <h1>Уход за каладиумами</h1>
+            </div>
+            
+            <nav>
+                <ul>
+                    <!-- Выделенный пункт меню с классом catalog-highlight -->
+					<li class="catalog-highlight"><a href="https://mkageo.github.io/caladium/index.html"><i class="fas fa-book-open"></i> Каталог каладиумов</a></li>
+					<li><a href="#preface">Для новичков</a></li>
+                    <li><a href="#awakening">Пробуждение</a></li>
+                    <li><a href="#planting">Посадка</a></li>
+                    <li><a href="#care">Уход</a></li>
+                    <li><a href="#dormancy">Покой</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Остальной код без изменений -->
+    <div class="hero">
+        <div class="container">
+            <h2>Искусство выращивания каладиумов</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="telegram-links">
+            <h3><i class="fab fa-telegram"></i> Присоединяйтесь к нашему сообществу!</h3>
+            <p>Общайтесь с другими энтузиастами, делитесь опытом и находите редкие сорта</p>
+            
+            <div class="links-container">
+                <div class="telegram-card">
+                    <i class="fab fa-telegram"></i>
+                    <h4>Основной канал</h4>
+                    <p>Уход за каладиумами, советы, фотографии</p>
+                    <a href="https://t.me/caladiums" target="_blank">@caladiums</a>
+                </div>
+                
+                <div class="telegram-card">
+                    <i class="fab fa-telegram"></i>
+                    <h4>Обсуждения</h4>
+                    <p>Группа по обсуждению каладиумов</p>
+                    <a href="https://t.me/CaladiumHome" target="_blank">@CaladiumHome</a>
+                </div>
+                
+            </div>
+        </div>
+
+        <section id="preface">
+            <h2><i class="fas fa-seedling"></i> Предисловие</h2>
+            
+            <div class="warning">
+                <p>Новичкам вполне достаточно этих простых шагов:</p>
+                <ol>
+                    <li>Посадите клубень в слегка влажную землю, присыпьте по макушечку</li>
+                    <li>Слегка полейте</li>
+                    <li>Ждите неделю, если подсохло - слегка полейте</li>
+                    <li>Если что-то взошло - поливайте больше</li>
+                </ol>
+                <p><strong>Этого достаточно для начала! Дальше можете не читать :)</strong></p>
+            </div>
+            
+            <p>Однако для дотошных и ищущих лишнего опыта на свою голову, далее излагаю СВОЙ опыт выращивания каладиумов. Ни в коем случае не претендую на истину в последней инстанции, допускаю, что мой опыт — это лишь стечение благоприятных обстоятельств.</p>
+            
+            <h3>Типы клубней каладиумов</h3>
+            
+            <div class="columns">
+                <div class="column">
+                    <h4><i class="fas fa-users"></i> Клубень-семейка</h4>
+                    <p>Не имеет одного лидера-глазка, представляет собой конгломерат разновозрастных клубеньков. Легко делится при посадке, дает много деток в процессе роста.</p>
+                    <div class="tip">
+                        <p><strong>Обоснование:</strong> Если такие клубни не делить, куст будет пышным, но листья останутся среднего размера. Деление позволяет развиваться листу в более крупные формы.</p>
+                    </div>
+                    <p>Характерен для классических сортов каладиума.</p>
+                    
+                    <div class="image-container">
+                        <img src="https://mkageo.github.io/caladium/img/proshedshij_kluben-semejka.jpg" alt="Проросший клубень-семейка">
+                        <div class="image-caption">Проросший клубень-семейка</div>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="https://mkageo.github.io/caladium/img/klubni_klassicheskih_sortov.jpg" alt="Клубни классических сортов">
+                        <div class="image-caption">Клубни классических сортов каладиума. Клубни-семейка.</div>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <h4><i class="fas fa-user"></i> Клубень-эгоист</h4>
+                    <p>Имеет форму картофелины или колокольчика с лидером-глазком. Дает мало деток (1-2 за сезон), отделение которых представляет сложность.</p>
+                    <div class="tip">
+                        <p><strong>Обоснование:</strong> Характерен для тайских (азиатских) гибридов, которые выращивают как "куст" — один глазок дает множество листьев.</p>
+                    </div>
+                    <p>Характерен для азиатских гибридов.</p>
+                    
+                    <div class="image-container">
+                        <img src="https://mkageo.github.io/caladium/img/kluben_egoist.jpg" alt="Клубень эгоист">
+                        <div class="image-caption">Клубень эгоист</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Состояние клубней перед посадкой</h3>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-check-circle"></i> Готовые к посадке</h4>
+                <p>Клубни с проросшими глазками и корнями. Можно сразу сажать.</p>
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/kluben_gotovyj_k_posadke.jpg" alt="Клубень готовый к посадке">
+                    <div class="image-caption">Клубень готовый к посадке</div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-bed"></i> Спящие клубни</h4>
+                <p>Период покоя был достаточным, но рост еще не активизировался. Требуют пробуждения.</p>
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/spyashchij_kluben.jpg" alt="Спящий клубень">
+                    <div class="image-caption">Спящий клубень</div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Рискованные клубни</h4>
+                <p>Маленькие (до 2 см), слабые, больные или недавно уснувшие. Требуют особого ухода — только тепличка и не переувлажненный грунт.</p>
+            </div>
+        </section>
+
+        <section id="awakening">
+            <h2><i class="fas fa-sun"></i> Пробуждение клубней</h2>
+            <p>После покупки еще не проросших клубней или при необходимости пробуждения клубня после периода покоя.</p>
+            
+            <div class="warning">
+                <h4><i class="fas fa-exclamation-circle"></i> Важно!</h4>
+                <p>Клубни самостоятельно просыпаются после зимовки. Не торопите их, помещая сразу во влажный грунт и теплое место — это грозит загниванием!</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-1"></i> Замачивание</h4>
+                <p>Приготовьте раствор из стимулирующего укоренение вещества и фунгицида. Замочите клубни.</p>
+                <div class="tip">
+                    <p><strong>Обоснование:</strong> Замачивание насыщает влагой подсохшие клубни и убивает патогенную микрофлору на поверхности.</p>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-2"></i> Помещение в тепличку</h4>
+                <p>Поместите клубни в слегка влажный грунт, сбрызните водой и закройте в прозрачной коробке (тепличке).</p>
+                <div class="tip">
+                    <p><strong>Обоснование:</strong> Создание повышенной влажности и стабильной температуры способствует контролируемому пробуждению без риска загнивания.</p>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/probuzhdenie_klubnej_v_teplichke.jpg" alt="Пробуждение клубней в тепличке">
+                    <div class="image-caption">Пробуждение клубней в тепличке</div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-3"></i> Температурный режим</h4>
+                <p>Поддерживайте температуру воздуха 26-28°C.</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-4"></i> Наблюдение</h4>
+                <p>Наблюдайте за появлением первых почек. Процесс может занять от недели до месяца.</p>
+            </div>
+            
+            <p>Этот вариант также подходит для покупных клубней, приобретаемых весной для посадки в апреле-мае.</p>
+        </section>
+
+        <section id="planting">
+            <h2><i class="fas fa-seedling"></i> Посадка клубней</h2>
+            <p>Стандартное время посадки: февраль-март. Используйте уже проснувшиеся и проросшие клубни.</p>
+            
+            <div class="image-container">
+                <img src="https://mkageo.github.io/caladium/img/prosnuvshijsya_kluben_kaladimuma.jpg" alt="Проснувшийся клубень">
+                <div class="image-caption">Проснувшийся клубень каладиума</div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-thermometer-half"></i> 1. Температурный режим</h4>
+                <p>Высаживайте в теплую почву (22-28°C).</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-check-circle"></i> 2. Подготовка</h4>
+                <p>Осмотрите клубень, убедитесь в отсутствии повреждений и гнили. Очистите от старых корней.</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-bath"></i> 3. Замачивание</h4>
+                <p>Приготовьте раствор из теплой воды (30-35°C), стимулятора укоренения, антистресса и фунгицида. Замочите на 1-2 часа.</p>
+                <div class="tip">
+                    <p><strong>Обоснование:</strong> Теплая вода стимулирует пробуждение, а фунгицид защищает от грибковых заболеваний в период уязвимости клубня.</p>
+                </div>
+                <p>После замачивания удалите отмокшие старые корни и донце.</p>
+                
+                <div class="image-columns">
+                    <div class="image-container">
+                        <img src="https://mkageo.github.io/caladium/img/donce_u_klubnya.jpg" alt="Донце у клубня">
+                        <div class="image-caption">Донце у клубня</div>
+                    </div>
+                    <div class="image-container">
+                        <img src="https://mkageo.github.io/caladium/img/otdelyaemoe_ot_klubnya_staroe_donce.jpg" alt="Отделяемое донце">
+                        <div class="image-caption">Отделяемое от клубня старое донце</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-spa"></i> 4. Посадка</h4>
+                <p>Выберите емкость диаметром в два раза больше клубня. Используйте прозрачные горшки для наблюдения за корнями.</p>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/prozrachnyj_stakanchik_dlya_nablyudeniya_za_kornevoj.jpg" alt="Прозрачный стаканчик">
+                    <div class="image-caption">Прозрачный стаканчик для наблюдения за корневой системой</div>
+                </div>
+                
+                <p>Подготовьте дренированный грунт (торф+перлит+кокосовый субстрат) слегка влажной консистенции. Посадите клубень почками вверх, оставив верхнюю часть чуть приоткрытой.</p>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/posadka_klubnej_kaladimuma.jpg" alt="Посадка клубня">
+                    <div class="image-caption">Посадка клубней каладиума</div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-home"></i> 5. Условия содержания</h4>
+                <p>Поместите горшок в теплое (22-28°C), светлое место без прямых солнечных лучей. Для непроснувшихся клубней используйте тепличку.</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-tint"></i> 6. Полив</h4>
+                <p>Первые дни не поливайте — опрыскивайте верхний слой грунта. После появления корешков поливайте умеренно, поддерживая легкую влажность.</p>
+                <div class="warning">
+                    <p><strong>Внимание:</strong> Избыточная влажность приводит к гниению клубня!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="care">
+            <h2><i class="fas fa-heart"></i> Уход за каладиумами</h2>
+            
+            <p>Когда появляются ростки, продолжайте обеспечивать растению тепло и свет. По мере роста можно добавлять удобрения.</p>
+            
+            <h3>Удобрения</h3>
+            <p>Каладиумы не требовательны к питанию, кроме случаев посадки в "пустые" грунты. Примеры удобрений:</p>
+            
+            <div class="fertilizer">
+                <h4><i class="fas fa-flask"></i> HESI TNT</h4>
+                <p>Органическая добавка для вегетативного роста. Дозировка: 25 мл на 5 литров воды.</p>
+            </div>
+            
+            <div class="fertilizer">
+                <h4><i class="fas fa-recycle"></i> HESI POWER ZYME</h4>
+                <p>Разлагает целлюлозу мертвых растений, предотвращая гниль. Дозировка: 10 мл на 5 литров воды.</p>
+            </div>
+            
+            <div class="fertilizer">
+                <h4><i class="fas fa-bolt"></i> HESI Super Vit</h4>
+                <p>Стимулятор роста и цветения. Дозировка: 1 капля на 5 литров воды.</p>
+            </div>
+            
+            <p>Эти удобрения можно использовать в каждый полив или через раз, чередуя между собой.</p>
+            
+            <div class="image-container">
+                <img src="https://mkageo.github.io/caladium/img/udobreniya_serii_hesi.jpg" alt="Удобрения HESI">
+                <div class="image-caption">Удобрения серии HESI</div>
+            </div>
+            
+            <h3>Пересадка</h3>
+            <p>Обычно выбранного при посадке размера емкости и грунта хватает на один сезон роста каладиума.</p>
+            
+            <h3>Размножение каладиума</h3>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-baby"></i> Отделение деток</h4>
+                <p>Некоторые сорта дают много деток. Разделение лучше проводить при весенней посадке.</p>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/otdelenie_nebolshih_klubnej_ot_materinskih.jpg" alt="Отделение деток">
+                    <div class="image-caption">Отделение небольших клубней от материнских</div>
+                </div>
+                
+                <p>Детки могут легко отделяться или требовать разрезания основного клубня. Отделяйте не позже июля.</p>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/detka_kaladimuma_kotoruyu_mozhno_otdelit_tolko_otrezav_ee_ot_osnovnogo_klubnya.jpg" alt="Детка на основном клубне">
+                    <div class="image-caption">Детка каладиума, которую можно отделить только отрезав от основного клубня</div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-cut"></i> Деление клубней</h4>
+                <p>Крупные клубни можно делить на части не менее 1,5 см. Срезы обработайте углем или фунгицидом.</p>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/delenie_klubnya.jpg" alt="Деление клубня">
+                    <div class="image-caption">Деление клубня</div>
+                </div>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-seedling"></i> Размножение семенами</h4>
+                <p>Высевайте на влажный грунт или мох, накройте тепличкой. Поддерживайте температуру 25-30°C.</p>
+                <div class="tip">
+                    <p><strong>Обоснование:</strong> При семенном размножении происходит расщепление сортовых признаков, поэтому растения могут отличаться от материнских.</p>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/prorastayushchie_semena_kaladimuma.jpg" alt="Прорастающие семена">
+                    <div class="image-caption">Прорастающие семена каладиума</div>
+                </div>
+                
+                <p>Ростки появляются через 2-3 недели. Поливайте из пульверизатора, проветривайте тепличку.</p>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/seyancy_spustya_chetyre_mesyaca_posle_posadki.jpg" alt="Сеянцы каладиума">
+                    <div class="image-caption">Сеянцы спустя четыре месяца после посадки</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dormancy">
+            <h2><i class="fas fa-moon"></i> Переход в состояние покоя</h2>
+            
+            <p>С конца августа или осенью листья начинают сохнуть и опадать — это сигнал к началу периода покоя.</p>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-tint-slash"></i> Подготовка к покою</h4>
+                <p>Постепенно сокращайте полив, пока все листья не повянут. Грунт должен быть лишь слегка влажным.</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-cut"></i> Обрезка</h4>
+                <p>После высыхания листьев состригите их.</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-snowflake"></i> Зимнее хранение</h4>
+                <p>Вариант 1: Оставьте клубень в горшке, полностью просушите грунт и храните в темном прохладном месте.</p>
+                <div class="warning">
+                    <p><strong>Внимание:</strong> Непросушенная земля приводит к гниению клубня!</p>
+                </div>
+                <p>Вариант 2: Извлеките клубни, очистите от старых корней, обработайте фунгицидом и углем. Храните в сухом мхе или вермикулите.</p>
+            </div>
+            
+            <div class="step-box">
+                <h4><i class="fas fa-redo"></i> Пробуждение</h4>
+                <p>В феврале проверьте клубни на наличие почек или ростков. Начинайте процесс пробуждения.</p>
+                
+                <div class="image-container">
+                    <img src="https://mkageo.github.io/caladium/img/klubni_prorosli_posle_spyachki.jpg" alt="Проросшие клубни">
+                    <div class="image-caption">Клубни проросли после спячки</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Присоединяйтесь к нашему сообществу любителей каладиумов!</p>
+            <div class="links-container" style="margin-top: 1rem; justify-content: center;">
+                <a href="https://t.me/caladiums" target="_blank" class="btn" style="margin: 5px;"><i class="fab fa-telegram"></i> Основной канал</a>
+                <a href="https://t.me/CaladiumHome" target="_blank" class="btn" style="margin: 5px;"><i class="fab fa-telegram"></i> Обсуждения</a>
+            </div>
+            <p style="margin-top: 1.5rem;">© 2025 Уход за каладиумами. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Highlight active section in navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(pageYOffset >= (sectionTop - sectionHeight/3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
