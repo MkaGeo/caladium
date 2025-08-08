@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каладиумы: Образование деток</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --secondary: #8BC34A;
+            --accent: #FF9800;
+            --light: #F1F8E9;
+            --dark: #33691E;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background: var(--secondary);
+            color: white;
+            padding: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: var(--light);
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: rgba(139, 195, 74, 0.05);
+        }
+        .highlight {
+            background-color: rgba(255, 152, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+        .key-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .factor-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary);
+        }
+        .factor-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        @media (max-width: 768px) {
+            .key-factors {
+                grid-template-columns: 1fr;
+            }
+            table, th, td {
+                display: block;
+            }
+            th {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid #ddd;
+                margin-bottom: 1rem;
+                display: block;
+            }
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                font-weight: bold;
+            }
+            td:nth-of-type(1):before { content: "Период"; }
+            td:nth-of-type(2):before { content: "Действия"; }
+            td:nth-of-type(3):before { content: "Обоснование"; }
+        }
+      </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Страница 2: Образование деток -->
+        <header>
+            <h1>Программа для образования деток</h1>
+            <p class="subtitle">Стимуляция дочерних клубеньков каладиумов</p>
+        </header>
+
+        <div class="card">
+            <div class="card-header">Годовой план ухода</div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Период</th>
+                            <th>Действия</th>
+                            <th>Обоснование</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Январь-Февраль (Покой)</strong></td>
+                            <td>Стандартное хранение клубней</td>
+                            <td>Подготовка к новому циклу</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Март (Пробуждение)</strong></td>
+                            <td>Обработка почек цитокининовой пастой, поверхностная посадка</td>
+                            <td>Стимуляция спящих почек</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Апрель-Июнь (Ранний рост)</strong></td>
+                            <td>Осторожный полив, NPK 20-20-20 (1/2 дозы)</td>
+                            <td>Поддержка роста новых ростков</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Июль-Сентябрь (Пик вегетации)</strong></td>
+                            <td>Умеренное ограничение горшка, NPK 20-20-20</td>
+                            <td>Стимуляция деткообразования через мягкий стресс</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Октябрь (Подготовка к покою)</strong></td>
+                            <td>Аккуратное отделение деток (>1 см), обработка срезов</td>
+                            <td>Предотвращение конкуренции</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ноябрь-Декабрь (Покой)</strong></td>
+                            <td>Раздельное хранение деток и материнского клубня</td>
+                            <td>Контроль размера и состояния</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h3>Ключевая стратегия:</h3>
+            <p>Использование цитокининовой пасты для пробуждения спящих почек, поверхностная посадка клубня, умеренное ограничение пространства корней, аккуратное отделение деток осенью.</p>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card">
+                <h3>✨ Специальные методы</h3>
+                <p>Цитокининовая паста на почки<br>
+                Верхушка клубня над субстратом<br>
+                Небольшая теснота корней</p>
+            </div>
+            <div class="factor-card">
+                <h3>⚠️ Критические моменты</h3>
+                <p>Отделение только осенью (>1 см)<br>
+                Обработка срезов углем<br>
+                Раздельное хранение деток</p>
+            </div>
+            <div class="factor-card">
+                <h3>⚖️ Баланс питания</h3>
+                <p>Весь сезон: NPK 20-20-20<br>
+                Умеренные дозировки<br>
+                Стабильное питание</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Программа для максимального образования дочерних клубеньков</p>
+        </footer>
+    </div>
+</body>
+</html>
