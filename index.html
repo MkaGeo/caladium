@@ -1168,32 +1168,16 @@
                     row.addEventListener('click', () => {
                         if (window.innerWidth <= 768) {
                             openMobileModal(item);
+                            scrollToItem(item);
                         } else {
                             updateFeatures(item);
                             updateUrl(item['Сорт']);
-                            
-                            // Удаляем выделение у всех строк
-                            document.querySelectorAll('#tableBody tr').forEach(el => {
-                                el.classList.remove('selected');
-                            });
-                            
-                            // Добавляем выделение текущей строке
-                            row.classList.add('selected');
+                            scrollToItem(item);
                         }
                     });
                     
                     tableBody.appendChild(row);
                 });
-                
-                // Выделить первую строку, если есть данные и не мобильная версия
-                if (data.length > 0 && window.innerWidth > 768) {
-                    const firstRow = tableBody.querySelector('tr');
-                    if (firstRow) {
-                        firstRow.classList.add('selected');
-                        updateFeatures(data[0]);
-                        updateUrl(data[0]['Сорт']);
-                    }
-                }
             }
 
             // Заполнение каталога (обновлено по шаблону)
@@ -1306,17 +1290,11 @@
                         itemElement.addEventListener('click', () => {
                             if (window.innerWidth <= 768) {
                                 openMobileModal(item);
+                                scrollToItem(item);
                             } else {
                                 updateFeatures(item);
                                 updateUrl(item['Сорт']);
-                                
-                                // Удаляем выделение у всех элементов
-                                document.querySelectorAll('.directory-item').forEach(el => {
-                                    el.classList.remove('selected');
-                                });
-                                
-                                // Добавляем выделение текущему элементу
-                                itemElement.classList.add('selected');
+                                scrollToItem(item);
                             }
                         });
                         
@@ -1325,16 +1303,6 @@
                     
                     directoryContent.appendChild(letterGroup);
                 });
-                
-                // Выделить первый элемент, если есть данные и не мобильная версия
-                if (visibleData.length > 0 && window.innerWidth > 768) {
-                    const firstItem = directoryContent.querySelector('.directory-item');
-                    if (firstItem) {
-                        firstItem.classList.add('selected');
-                        updateFeatures(visibleData[0]);
-                        updateUrl(visibleData[0]['Сорт']);
-                    }
-                }
             }
 
             // Обновление URL
@@ -1470,6 +1438,64 @@
             window.closeMobileModal = function() {
                 document.getElementById('mobileModal').classList.remove('active');
             }
+            
+            // Прокрутка и выделение элемента
+            function scrollToItem(item) {
+                // Снимаем выделение со всех элементов
+                document.querySelectorAll('.directory-item.selected, #tableBody tr.selected').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                if (currentView === 'table') {
+                    const row = document.querySelector(`#tableBody tr[data-id="${item['ID']}"]`);
+                    if (row) {
+                        row.classList.add('selected');
+                        row.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    }
+                } else {
+                    const dirItem = document.querySelector(`.directory-item[data-id="${item['ID']}"]`);
+                    if (dirItem) {
+                        dirItem.classList.add('selected');
+                        dirItem.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    }
+                }
+            }
+            
+            // Обработка хэша URL
+            function handleHash() {
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    const sortName = hash.replace(/-/g, ' ');
+                    const item = caladiums.find(c => 
+                        c['Сорт'] && c['Сорт'].toLowerCase() === sortName.toLowerCase()
+                    );
+                    
+                    if (item) {
+                        if (window.innerWidth <= 768) {
+                            openMobileModal(item);
+                            scrollToItem(item);
+                        } else {
+                            updateFeatures(item);
+                            scrollToItem(item);
+                        }
+                    }
+                } else {
+                    // Нет хэша
+                    if (window.innerWidth <= 768) {
+                        window.closeMobileModal();
+                    } else {
+                        const featuresFrame = document.getElementById('featuresFrame');
+                        featuresFrame.innerHTML = '<div class="no-features">Выберите сорт для просмотра особенностей</div>';
+                    }
+                    // Снимаем выделение
+                    document.querySelectorAll('.directory-item.selected, #tableBody tr.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                }
+            }
+            
+            // Обработчик изменения хэша
+            window.addEventListener('hashchange', handleHash);
 
             // Поиск по всем данным
             function searchData() {
@@ -1541,33 +1567,6 @@
                 // Инициализация кнопок переключения вида
                 document.getElementById('tableViewBtn').addEventListener('click', () => toggleView('table'));
                 document.getElementById('directoryViewBtn').addEventListener('click', () => toggleView('directory'));
-                
-                // Обработка хэша URL при загрузке
-                const hash = window.location.hash.substring(1);
-                if (hash) {
-                    const sortName = hash.replace(/-/g, ' ');
-                    const item = caladiums.find(c => 
-                        c['Сорт'].toLowerCase() === sortName.toLowerCase()
-                    );
-                    if (item) {
-                        updateFeatures(item);
-                        
-                        // Прокрутка к выбранному элементу
-                        if (currentView === 'table') {
-                            const row = document.querySelector(`tr[data-id="${item['ID']}"]`);
-                            if (row) {
-                                row.classList.add('selected');
-                                row.scrollIntoView({behavior: 'smooth', block: 'center'});
-                            }
-                        } else {
-                            const dirItem = document.querySelector(`.directory-item[data-id="${item['ID']}"]`);
-                            if (dirItem) {
-                                dirItem.classList.add('selected');
-                                dirItem.scrollIntoView({behavior: 'smooth', block: 'center'});
-                            }
-                        }
-                    }
-                }
             }
 
             // Инициализация обработчиков
@@ -1575,6 +1574,9 @@
             
             // Начальная загрузка данных (каталог по умолчанию)
             toggleView('directory');
+            
+            // Обработка хэша при загрузке
+            handleHash();
             
             // Скрываем кнопку таблицы в мобильной версии
             if (window.innerWidth <= 768) {
