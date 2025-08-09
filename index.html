@@ -1167,6 +1167,7 @@
                     // Обработчик клика для строки
                     row.addEventListener('click', () => {
                         if (window.innerWidth <= 768) {
+                            updateUrl(item['Сорт']);
                             openMobileModal(item);
                             scrollToItem(item);
                         } else {
@@ -1289,6 +1290,7 @@
                         
                         itemElement.addEventListener('click', () => {
                             if (window.innerWidth <= 768) {
+                                updateUrl(item['Сорт']);
                                 openMobileModal(item);
                                 scrollToItem(item);
                             } else {
@@ -1392,6 +1394,9 @@
                 const modal = document.getElementById('mobileModal');
                 const modalContent = document.getElementById('mobileModalContent');
                 
+                // Обновляем URL перед открытием
+                updateUrl(item['Сорт']);
+                
                 let collectionHtml;
                 if (item['CaladiumHome'] === '1') {
                     collectionHtml = `
@@ -1437,6 +1442,8 @@
             // Функция для закрытия мобильного модального окна
             window.closeMobileModal = function() {
                 document.getElementById('mobileModal').classList.remove('active');
+                // Убираем хэш при закрытии
+                window.history.pushState({}, '', window.location.pathname);
             }
             
             // Прокрутка и выделение элемента
@@ -1472,8 +1479,8 @@
                     
                     if (item) {
                         if (window.innerWidth <= 768) {
-                            openMobileModal(item);
                             scrollToItem(item);
+                            openMobileModal(item);
                         } else {
                             updateFeatures(item);
                             scrollToItem(item);
